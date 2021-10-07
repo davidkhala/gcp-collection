@@ -19,7 +19,8 @@ https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compres
   - CSV:  GZIP
   - JSON: GZIP
   - Avro: DEFLATE, SNAPPY	
-  - Parquet:  SNAPPY, GZIP	
+  - Parquet:  SNAPPY, GZIP
+- Move to Autonomous DB: https://qiita.com/RexZheng/items/d3e5cfed0bd579b4c4d2
 ### Export Data method
 https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
 - Cloud Console
