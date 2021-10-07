@@ -15,7 +15,7 @@ https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compres
 https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
 - Cloud Console
 - command line `bq extract`
-  > bq extract <project_id>:<dataset>.<table> gs://<bucket>/<filename.ext>
+  > `bq extract <project_id>:<dataset>.<table> gs://<bucket>/<filename.ext>`
 - API or client lib
 - SQL Statment [EXPORT DATA](https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement)
   > EXPORT DATA OPTIONS(
