@@ -10,3 +10,19 @@ CREATE SCHEMA [IF NOT EXISTS]
 https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
 
 
+## Export data
+https://cloud.google.com/bigquery/docs/exporting-data#export_limitations
+- The only supported export location is Google Cloud Storage
+- You can export up to 1 GB of table data to a single file
+https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
+- format support
+  - CSV:  GZIP
+  - JSON: GZIP
+  - Avro: DEFLATE, SNAPPY	
+  - Parquet:  SNAPPY, GZIP	
+### Export Data method
+https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
+- Cloud Console
+- command line `bq extract`
+- API or client lib
+- SQL Statment [EXPORT DATA](https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement)
