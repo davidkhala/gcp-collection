@@ -26,3 +26,11 @@ https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
 - command line `bq extract`
 - API or client lib
 - SQL Statment [EXPORT DATA](https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement)
+  > EXPORT DATA OPTIONS(
+  uri='gs://bucket/folder/*.csv',
+  format='CSV',
+  overwrite=true,
+  header=true,
+  field_delimiter=';') AS
+SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
+  
