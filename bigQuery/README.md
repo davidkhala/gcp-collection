@@ -6,8 +6,8 @@ https://cloud.google.com/bigquery/docs/exporting-data#export_limitations
 - You can export up to 1 GB of table data to a single file
 https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
 - format support
-  - CSV:  GZIP
-  - JSON: GZIP
+  - CSV:  raw, GZIP
+  - JSON: raw, GZIP
   - Avro: DEFLATE, SNAPPY	
   - Parquet:  SNAPPY, GZIP
 - Move to Autonomous DB: https://qiita.com/RexZheng/items/d3e5cfed0bd579b4c4d2
