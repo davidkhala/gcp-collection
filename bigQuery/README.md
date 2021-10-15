@@ -1,5 +1,8 @@
 # BigQuery
 
+[History](https://towardsdatascience.com/bigquery-the-unlikely-birth-of-a-cloud-juggernaut-b5ad476525b7)
+
+[Compete with Redshift](https://aws.amazon.com/cn/blogs/big-data/fact-or-fiction-google-big-query-outperforms-amazon-redshift-as-an-enterprise-data-warehouse/)
 
 
 ## Table
