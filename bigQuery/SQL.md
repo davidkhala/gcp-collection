@@ -1,3 +1,6 @@
+### SQL Translation
+Currently (05-OCT-2021), only Teradata SQL is supported.
+
 ### [Creates a dataset.](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement)
 ```
 CREATE SCHEMA [IF NOT EXISTS]
