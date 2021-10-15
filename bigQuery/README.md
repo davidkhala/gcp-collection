@@ -1,3 +1,10 @@
+# BigQuery
+
+
+
+## Table
+- **No Primary Key**. BigQuery is designed to store one large denormalized table. It is basically a data lake solution. [Reference](https://nl.devoteam.com/expert-view/creating-anonymized-primary-keys-for-google-bigquery/)
+
 
 
 ## Export data
