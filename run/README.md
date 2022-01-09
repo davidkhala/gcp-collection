@@ -3,7 +3,7 @@
 ## Dependency
 Build from source
 - [Cloud Build](cloudbuild.googleapis.com)
-- [Artifact Registry](artifactregistry.googleapis.com)
+- [Artifact Registry[Cost$]](artifactregistry.googleapis.com)
 
 ## Nodejs
 https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs?hl=en_US
