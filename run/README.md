@@ -2,8 +2,10 @@
 
 ## Dependency
 Build from source
-- [Cloud Build](cloudbuild.googleapis.com)
-- [Artifact Registry[Cost$]](artifactregistry.googleapis.com)
+- [Cloud Build](https://cloud.google.com/build/pricing)
+  - 2 hours free per day
+- [Artifact Registry](https://cloud.google.com/artifact-registry/pricing)
+  - 0.5 GB storage free
 
 ## Nodejs
 https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs?hl=en_US
