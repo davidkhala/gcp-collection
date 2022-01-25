@@ -2,7 +2,9 @@
   "name": "@davidkhala/gcp",
   "version": "0.0.0",
   "dependencies": {
-    "gcp-metadata": "latest",
+    "gcp-metadata": "latest"
+  },
+  "devDependencies": {
     "google-auth-library": "latest"
   },
   "type": "module"
