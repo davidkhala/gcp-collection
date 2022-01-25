@@ -23,6 +23,7 @@ export const getOption = (client_email, private_key, projectId) => ({
 	},
 	projectId,
 })
+
 export const fromFile = (serviceAccountJSONFile) => {
 	process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceAccountJSONFile
 }
