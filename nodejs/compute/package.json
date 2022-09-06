@@ -1,0 +1,16 @@
+{
+  "name": "@davidkhala/gcp-compute",
+  "version": "0.0.0",
+  "dependencies": {
+    "gcp-metadata": "latest",
+    "@google-cloud/compute": "latest",
+    "@davidkhala/gcp-format": "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  }
+}
