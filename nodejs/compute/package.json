@@ -1,6 +1,6 @@
 {
   "name": "@davidkhala/gcp-compute",
-  "version": "0.0.0",
+  "version": "0.0.0-alpha",
   "dependencies": {
     "gcp-metadata": "latest",
     "@google-cloud/compute": "latest",
