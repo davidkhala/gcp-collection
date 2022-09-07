@@ -1,9 +1,17 @@
 export default class GCPClass {
+    /**
+     *
+     * @param projectId
+     * @param [client_email]
+     * @param [private_key]
+     */
     constructor(projectId, client_email, private_key) {
 
-        this.credentials = {
-            client_email,
-            private_key,
+        if (client_email && private_key) {
+            this.credentials = {
+                client_email,
+                private_key,
+            }
         }
 
         this.projectId = projectId

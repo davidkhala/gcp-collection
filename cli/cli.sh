@@ -15,6 +15,10 @@ EOM
 }
 setup() {
   gcloud init
+
+}
+setup-sdk() {
+  gcloud auth application-default login
 }
 setup-server() {
   gcloud init --no-browser
