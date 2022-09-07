@@ -17,7 +17,8 @@ setup() {
   gcloud init
 
 }
-setup-sdk() {
+grant-sdk() {
+  # no projectId if auth standalone, you can use `gcloud init` to add projectId into context
   gcloud auth application-default login
 }
 setup-server() {
@@ -28,5 +29,11 @@ setup-service-account() {
 }
 logout() {
   gcloud auth revoke
+  gcloud auth application-default revoke
+}
+list() {
+  gcloud auth list # not showing application-default credential
+
+  gcloud auth application-default print-access-token
 }
 $@

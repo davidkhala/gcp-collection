@@ -8,8 +8,14 @@ export class Region extends GCPClass {
     }
 
     async list() {
+        if (!this.projectId) {
+            this.projectId = await this.client.getProjectId()
+        }
 
-        const [res] = await this.client.list({project: this.projectId});
+        // TODO field mask
+        const [res] = await this.client.list({
+            project: this.projectId,
+        });
         return res.map(({name}) => name)
     }
 }

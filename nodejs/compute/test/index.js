@@ -3,9 +3,9 @@ import {RegionsClient} from '@google-cloud/compute'
 
 describe('gcp', function () {
     this.timeout(0)
-    const projectId = 'freetier-only'
-    it('connect', async () => {
 
+    it('connect', async () => {
+        const projectId = 'freetier-only'
         const clientEmail = 'cloud-region@freetier-only.iam.gserviceaccount.com'
         const {private_key} = process.env
 
@@ -15,9 +15,18 @@ describe('gcp', function () {
 
     })
     it('connect default', async () => {
-        const client = new Region(projectId);
+        const client = new Region();
 
         const result = await client.list();
         console.debug(result)
+    })
+    it('raw connect', async () => {
+        const client = new RegionsClient()
+        const _project = await client.getProjectId()
+        console.info(_project)
+        const asyncResults = await client.list()
+        // console.info(asyncResults)
+
+
     })
 })

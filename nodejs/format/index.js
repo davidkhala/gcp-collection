@@ -1,7 +1,7 @@
 export default class GCPClass {
     /**
      *
-     * @param projectId
+     * @param [projectId]
      * @param [client_email]
      * @param [private_key]
      */
@@ -18,10 +18,17 @@ export default class GCPClass {
     }
 
     as(ClientClass) {
-        if (this.client) {
-            this.disconnect();
-        }
         this.client = new ClientClass(this);
+        return this
+    }
+
+    async connect() {
+        if (this.projectId) {
+            await this.client.initialize() // assert-like. Will not prompt if no projectId in context
+        } else {
+            this.projectId = await this.client.getProjectId()
+        }
+
         return this.client;
     }
 

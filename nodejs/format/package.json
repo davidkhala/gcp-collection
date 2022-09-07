@@ -1,8 +1,13 @@
 {
   "name": "@davidkhala/gcp-format",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.2",
   "type": "module",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@google-cloud/compute": "latest",
+    "google-auth-library": "latest",
+    "mocha": "latest"
   }
 }
