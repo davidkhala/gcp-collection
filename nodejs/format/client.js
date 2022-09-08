@@ -8,13 +8,18 @@
  * You can await on this method if you want to make sure the client is initialized.
  */
 export const connect = async (anyClient) => {
-	await anyClient.initialize()
+    await anyClient.initialize()
 }
 export const disconnect = async (anyClient) => {
-	/**
-	 * Terminate the gRPC channel and close the client.
-	 *
-	 * The client will no longer be usable and all future behavior is undefined.
-	 */
-	await anyClient.close()
+    /**
+     * Terminate the gRPC channel and close the client.
+     *
+     * The client will no longer be usable and all future behavior is undefined.
+     */
+    await anyClient.close()
+}
+
+export const mask = (fields, callOptions = {otherArgs: {headers: {}}}) => {
+    callOptions.otherArgs.headers['X-Goog-FieldMask'] = fields.map(field => `items.${field}`).join(',')
+    return callOptions;
 }

@@ -1,5 +1,6 @@
 import {RegionsClient} from "@google-cloud/compute"
 import GCPClass from '@davidkhala/gcp-format/index.js'
+import {mask} from '@davidkhala/gcp-format/client.js'
 
 export class Region extends GCPClass {
     constructor(projectId, client_email, private_key) {
@@ -12,11 +13,10 @@ export class Region extends GCPClass {
             this.projectId = await this.client.getProjectId()
         }
 
-        // TODO field mask
 
         const raw = await this.client.list({
             project: this.projectId,
-        });
-        return raw[0].map(({name}) => name)
+        }, mask(['name']));
+        return raw[0].map(({name, zones, quotas}) => name)
     }
 }
