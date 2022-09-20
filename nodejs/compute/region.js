@@ -1,6 +1,7 @@
 import {RegionsClient} from "@google-cloud/compute"
 import GCPClass from '@davidkhala/gcp-format/index.js'
 import {mask} from '@davidkhala/gcp-format/client.js'
+import assert from "assert";
 
 export class Region extends GCPClass {
     constructor(projectId, client_email, private_key) {
@@ -9,10 +10,7 @@ export class Region extends GCPClass {
     }
 
     async list() {
-        if (!this.projectId) {
-            this.projectId = await this.client.getProjectId()
-        }
-
+        assert.ok(this.projectId, 'this.projectId undefined')
 
         const raw = await this.client.list({
             project: this.projectId,
