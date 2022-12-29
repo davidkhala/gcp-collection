@@ -1,5 +1,4 @@
-## Price
-Looker doesn’t publicly release pricing information
+
 ## Deployment option
 
 Browser, or any .jar runtime
@@ -7,7 +6,5 @@ Browser, or any .jar runtime
 > Instead of waiting weeks or months, Looker customers can deploy the platform in hours because it ‘s packaged in a .jar file. The platform can be installed within the customer’s existing infrastructure and hosted on either the customer’s servers or Looker’s servers.
 > Looker’s implementation team can also build a customized deployment plan that aligns with the client’s needs and requirements.
 
-## Reference
-https://www.betterbuys.com/bi/looker-vs-tableau/
 
 
