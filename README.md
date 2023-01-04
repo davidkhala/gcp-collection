@@ -3,4 +3,8 @@
 
 ## Hardware root of trust
 - The first integrity check for Google servers uses a hardware root of trust.
-- Each server in the data center has its own unique identity. This identity can be tied to the hardware root of trust and the software with which the machine boots
+### Datacenter Identity
+- Each server in the data center has its own unique identity.
+- This identity can be tied to the hardware root of trust and the software with which the machine boots
+- This identity is used to authenticate API calls (Application Layer Transport Security (ALTS) system) to and from low-level management services on the machine.
+- This identity is used for mutual server authentication and transport encryption.
