@@ -18,6 +18,10 @@ dividing a large table into smaller partitions
   - When your table operation exceeds a quota, you can scope the table operations to specific partition column values.
   - You want to determine query costs before a query runs. Calculate a query cost estimate by pruning a partitioned table, then you can issue a query dry run to estimate query costs.
   - Control costs by reducing the number of bytes read by a query
+- Types of partitioning
+  - Integer range partitioning: based on ranges of values in a `INTEGER` column, such as an auto-incremental index column
+  - Time-unit column partitioning: based on a `DATE`,`TIMESTAMP`, or `DATETIME` column in the table
+  - Ingestion time partitioning: BQ automatically assigns rows to partitions per ingestion time with hourly, daily, monthly, or yearly granularity
 
 
 
