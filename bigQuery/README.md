@@ -6,6 +6,8 @@
 
 
 
+# Dataset
+Datasets are top-level containers that are used to organize and control access to your tables and views. 
 
 
 ## Table
