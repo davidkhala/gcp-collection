@@ -25,6 +25,8 @@ dividing a large table into smaller partitions
   - Time-unit column partitioning: based on a `DATE`,`TIMESTAMP`, or `DATETIME` column in the table
   - Ingestion time partitioning: BQ automatically assigns rows to partitions per ingestion time with hourly, daily, monthly, or yearly granularity
 
+## View
 
+### [materialized-views](https://cloud.google.com/bigquery/docs/materialized-views-intro)
 
   
