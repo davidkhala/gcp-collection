@@ -19,5 +19,6 @@
 
 ## Use case
 - [When the data is denormalized](https://medium.com/@knoldus/bigquery-efficient-data-warehouse-schema-design-b7f53d72444a), BQ facilitate efficient data warehouse schema design which is using the nested (`RECORD`) & repeated (`REPEATED` mode) columns.
+  - Similar to Native JSON in Oracle DB
 
 [Document](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
