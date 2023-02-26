@@ -1,5 +1,7 @@
 ### SQL Translation
-Currently (05-OCT-2021), only Teradata SQL is supported.
+Currently (26-Feb-2023), following dialects are supported
+- Teradata SQL
+- AWS Redshift SQL
 
 ### [Creates a dataset.](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement)
 ```
