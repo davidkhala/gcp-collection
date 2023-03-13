@@ -1,1 +1,3 @@
 ## Migration from...
+- Teradata
+  - [White paper by Pythian](https://resources.pythian.com/hubfs/White-Papers/Migrate-Teradata-to-Google-BigQuery.pdf)
