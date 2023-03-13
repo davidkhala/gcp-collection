@@ -8,7 +8,6 @@ https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compres
   - JSON: raw, GZIP
   - Avro: DEFLATE, SNAPPY	
   - Parquet:  SNAPPY, GZIP
-- Move to Autonomous DB: https://qiita.com/RexZheng/items/d3e5cfed0bd579b4c4d2
 ## Method
 https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
 - Cloud Console
@@ -23,3 +22,7 @@ https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
   header=true,
   field_delimiter=';') AS
 SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
+
+
+## Migration Guide
+[Oracle Autonomous DB](https://qiita.com/RexZheng/items/d3e5cfed0bd579b4c4d2)
