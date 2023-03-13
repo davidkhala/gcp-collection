@@ -14,7 +14,7 @@ Datasets are top-level containers that are used to organize and control access t
 
 
 ## Table
-- **No Primary Key**. BigQuery is designed to store one large denormalized table. It is basically a data lake solution. [Reference](https://nl.devoteam.com/expert-view/creating-anonymized-primary-keys-for-google-bigquery/)
+- **No Primary Key, unique key or index column**. BigQuery is designed to store one large denormalized table. It is basically a data lake solution. [Reference](https://nl.devoteam.com/expert-view/creating-anonymized-primary-keys-for-google-bigquery/)
 ### [partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables)
 dividing a large table into smaller partitions
 - [Pruning](https://cloud.google.com/bigquery/docs/querying-partitioned-tables):  BigQuery can scan the partitions that match the filter and skip the remaining partitions
