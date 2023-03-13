@@ -9,6 +9,10 @@ Index
 - [SQL Translation](./SQL.md)
 - [Data Type](./data-type.md)
 
+## Connect
+If native support is not yet available for the BI layer in use, Google has partnered with [Simba Technologies](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to provide ODBC and JDBC drivers
+
+
 # Dataset
 Datasets are top-level containers that are used to organize and control access to your tables and views. 
 
