@@ -4,7 +4,10 @@
 
 [Compete with Redshift](https://aws.amazon.com/cn/blogs/big-data/fact-or-fiction-google-big-query-outperforms-amazon-redshift-as-an-enterprise-data-warehouse/)
 
-
+Index
+- [$bq CLI](./bq.md)
+- [SQL Translation](./SQL.md)
+- [Data Type](./data-type.md)
 
 # Dataset
 Datasets are top-level containers that are used to organize and control access to your tables and views. 
