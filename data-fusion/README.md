@@ -3,6 +3,6 @@ a fully managed WYSIWYG GUI based interface built on the open source CDAP projec
 
 - has a rich ecosystem of pre-built connectors and transformations 
 - It allows organizations to rapidly develop and deploy data pipelines, track the lineage of data as it flows through the pipelines
-
+- Use Metadata to tag different components so that they are easily identifiable and managed.
 
 
