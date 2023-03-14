@@ -3,6 +3,8 @@
 ## Limit
 - **No Primary Key, unique key or index column**. BigQuery is designed to store one large denormalized table. It is basically a data lake solution. [Reference](https://nl.devoteam.com/expert-view/creating-anonymized-primary-keys-for-google-bigquery/)
 - Does not support row level or column level security at a table level.
+  - Workaround 1: control user access at a dataset level using ACLs and IAM Policies.
+  - Workaround 2: implement data control structures joined in for every query at the database level. This approach can be quite flexible, but can also be a very complex and administratively intense undertaking.
 
 ## [Partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables)
 dividing a large table into smaller partitions
