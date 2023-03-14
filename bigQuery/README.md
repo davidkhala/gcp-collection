@@ -10,7 +10,11 @@ Index
 - [Data Type](./data-type.md)
 
 ## Connect
-If native support is not yet available for the BI layer in use, Google has partnered with [Simba Technologies](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to provide ODBC and JDBC drivers
+- querying data directly from GCS and Google Drive.
+  - AVRO, JSON NL, CSV files
+  - Google Cloud Datastore backup 
+- Google Sheets (first tab only)
+- If native support is not yet available for the BI layer in use, Google has partnered with [Simba Technologies](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to provide ODBC and JDBC drivers
 
 
 
