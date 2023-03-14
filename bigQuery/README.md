@@ -4,7 +4,9 @@
 
 [Compete with Redshift](https://aws.amazon.com/cn/blogs/big-data/fact-or-fiction-google-big-query-outperforms-amazon-redshift-as-an-enterprise-data-warehouse/)
 
-Index
+Both ETL & ELT strategies can be used very effectively with BigQuery as the primary & final destination data store and GCS as the staging (or ingest) or intermediate data store as required.
+
+# Document Index
 - [$bq CLI](./bq.md)
 - [SQL Translation](./SQL.md)
 - [Data Type](./data-type.md)
