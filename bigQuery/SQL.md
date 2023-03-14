@@ -1,9 +1,11 @@
-### SQL Translation
+
+# SQL Translation
 Currently (26-Feb-2023), following dialects are supported
 - Teradata SQL
 - AWS Redshift SQL
 
-### [Creates a dataset.](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement)
+# Snippets
+[Creates a dataset.](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement)
 ```
 CREATE SCHEMA [IF NOT EXISTS]
 [project_name.]dataset_name
@@ -11,7 +13,7 @@ CREATE SCHEMA [IF NOT EXISTS]
 ```
 
 
-## Data definition language (DDL)
+# Data definition language (DDL)
 https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
 unsupported schema modifications include the following:
 - Changing a column's name.
