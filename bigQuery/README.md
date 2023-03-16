@@ -6,6 +6,13 @@
 
 Both ETL & ELT strategies can be used very effectively with BigQuery as the primary & final destination data store and GCS as the staging (or ingest) or intermediate data store as required.
 
+## Design and limit
+https://www.youtube.com/watch?v=Vj6ksosHdhw
+- No Join
+- No primary key, unique key or index column
+- Denormalize tables
+
+
 # Document Index
 - [$bq CLI](./bq.md)
 - [SQL Translation](./SQL.md)
