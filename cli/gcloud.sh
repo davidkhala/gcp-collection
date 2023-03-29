@@ -4,6 +4,7 @@ setup() {
 
 }
 grantSdk() {
+  # used for local dev environment to use gcloud with Google Account principal. 
   # no projectId if auth standalone, you can use `gcloud init` to add projectId into context
   gcloud auth application-default login
 }
