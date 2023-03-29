@@ -14,7 +14,10 @@ setupADC() {
 setupServer() {
   gcloud init --no-browser
 }
-setServiceAccount() {
+loginServiceAccount(){
+  gcloud auth login --cred-file=$1
+}
+updateServiceAccount() {
   gcloud auth activate-service-account --key-file=$1
 }
 logout() {
