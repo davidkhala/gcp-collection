@@ -14,10 +14,10 @@ setupADC() {
 setupServer() {
   gcloud init --no-browser
 }
-loginServiceAccount(){
-  gcloud auth login --cred-file=$1
-}
-updateServiceAccount() {
+
+loginServiceAccount() {
+  # gcloud auth activate-service-account serves the same function as gcloud auth login but uses a service account rather than Google user credentials.
+  # same as `gcloud auth login --cred-file=$1`
   gcloud auth activate-service-account --key-file=$1
 }
 logout() {
