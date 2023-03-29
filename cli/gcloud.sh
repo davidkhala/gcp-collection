@@ -1,17 +1,20 @@
 
 setup() {
   gcloud init
-
 }
-grantSdk() {
-  # used for local dev environment to use gcloud with Google Account principal. 
+loginWebUser(){
+  gcloud auth login --brief
+}
+setupADC() {
+  # Application Default Credentials (ADC) used in calling Google APIs. 
+  # used for local dev environment to use lanuage specific gcp sdk 
   # no projectId if auth standalone, you can use `gcloud init` to add projectId into context
   gcloud auth application-default login
 }
 setupServer() {
   gcloud init --no-browser
 }
-setupServiceAccount() {
+setServiceAccount() {
   gcloud auth activate-service-account --key-file=$1
 }
 logout() {
