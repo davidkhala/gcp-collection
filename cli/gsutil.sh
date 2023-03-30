@@ -1,4 +1,5 @@
 countFiles() {
-  gsutil du gs://$1 | wc -l
+  gsutil du gs://$1/* | wc -l
+  
 }
 $@
