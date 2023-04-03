@@ -17,7 +17,7 @@ EOM
 install-gke-plugin(){
   # `gke-gcloud-auth-plugin`, which is needed for continued use of kubectl, was not found or is not executable.
   # https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
-  sudo yum install -y google-cloud-sdk-gke-gcloud-auth-plugin
+  sudo yum install -y google-cloud-cli-gke-gcloud-auth-plugin
 
 }
 $@
