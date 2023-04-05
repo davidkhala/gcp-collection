@@ -3,6 +3,8 @@
 ## Limit
 - **No Primary Key, unique key or index column**. 
   - [If we do want anonymized primary keys, we need to generate them on our own](https://nl.devoteam.com/expert-view/creating-anonymized-primary-keys-for-google-bigquery/)
+  - Workaround: You can create indexes in BQ table using `CLUSTER BY` while creating table
+
 - Does not support row level or column level security at a table level.
   - Workaround 1: control user access at a dataset level using ACLs and IAM Policies.
   - Workaround 2: implement data control structures joined in for every query at the database level. This approach can be quite flexible, but can also be a very complex and administratively intense undertaking.
@@ -21,3 +23,7 @@ Types of partitioning
   - Integer range partitioning: based on ranges of values in a `INTEGER` column, such as an auto-incremental index column
   - Time-unit column partitioning: based on a `DATE`,`TIMESTAMP`, or `DATETIME` column in the table
   - Ingestion time partitioning: BQ automatically assigns rows to partitions per ingestion time with hourly, daily, monthly, or yearly granularity
+
+## [Clustered tables](https://cloud.google.com/bigquery/docs/clustered-tables)
+
+
