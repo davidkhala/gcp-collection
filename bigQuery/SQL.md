@@ -1,3 +1,6 @@
+# Dataform: Manage your SQL code project
+With Dataform, data teams collaborate on a single repository to manage their SQL code while following software engineering best practices such as version control, environments, testing, and documentation.
+
 
 # SQL Translation
 Currently (26-Feb-2023), following dialects are supported
