@@ -1,5 +1,7 @@
+set -e
 translate4CLI() {
-    echo $1 | sed "s/'/\"/g" | sed '/^[[:blank:]]*--/d;s/--.*//'
+    local result=$(cat $1 | sed "s/'/\"/g" | sed '/^[[:blank:]]*--/d;s/--.*//')
+    echo "'${result}'"
 }
 
 $@
