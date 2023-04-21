@@ -1,4 +1,6 @@
 # Table
+## Object table (preview)
+read-only tables over unstructured data objects that reside in Cloud Storage
 
 ## Limit
 - **No Primary Key, unique key or index column**. 
