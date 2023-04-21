@@ -1,5 +1,5 @@
 # Table
-## Object table (preview)
+## [Object table (preview)](https://cloud.google.com/bigquery/docs/object-table-introduction)
 read-only tables over unstructured data objects that reside in Cloud Storage
 
 ## Limit
