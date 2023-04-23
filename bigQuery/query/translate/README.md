@@ -2,10 +2,16 @@
 Currently (26-Feb-2023), following dialects are supported
 - Teradata SQL
 - AWS Redshift SQL
+## Before you begin (prepare)
+1. [collect_source_files](https://cloud.google.com/bigquery/docs/batch-sql-translator#collect_source_files)
+  - Source files can also include comments
+3. [create_metadata_files](https://cloud.google.com/bigquery/docs/batch-sql-translator#create_metadata_files)
+  1. use `dwh-migration-dumper` command-line tool to [generate the metadata information](https://cloud.google.com/bigquery/docs/generate-metadata)
+  2. Once metadata files are prepared, include them along with the source files in the translation source folder
+  3. 
 
-
+# Get Started
 You have three options for submitting a batch translation job:
-
 ## CLI: [Batch translation client](https://github.com/google/dwh-migration-tools)
 Configure a job by changing settings in a configuration file, and submit the job using the command line. This approach doesn't require you to 
 
