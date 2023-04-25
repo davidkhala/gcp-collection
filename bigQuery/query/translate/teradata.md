@@ -5,3 +5,5 @@
 - Unsupported statement type GRANT
 - Unsupported PARTITION BY COLUMN
 - BigQuery does not support set tables.
+# Stored Procedure translate
+https://roboquery.com/d/convert-teradata-stored-procedure-to-bigquery-migration-guide
