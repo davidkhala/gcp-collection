@@ -27,8 +27,9 @@ def create_migration_workflow(
 
     # Set the source dialect to Teradata SQL.
     source_dialect = bigquery_migration_v2.Dialect()
+    # always use BTEQ mode (which includes SQL).
     source_dialect.teradata_dialect = bigquery_migration_v2.TeradataDialect(
-        mode=bigquery_migration_v2.TeradataDialect.Mode.SQL
+        mode=bigquery_migration_v2.TeradataDialect.Mode.BTEQ
     )
 
     # Set the target dialect to BigQuery dialect.
@@ -66,4 +67,4 @@ def create_migration_workflow(
     print("Created workflow:")
     print(response.display_name)
     print("Current state:")
-    print(response.State(response.state))
+    print(response.State(response.state).name)
