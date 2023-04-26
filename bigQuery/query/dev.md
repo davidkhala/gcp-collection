@@ -8,3 +8,5 @@
 With Dataform, data teams collaborate on a single repository to manage their SQL code while following software engineering best practices such as version control, environments, testing, and documentation.
 - Preview (05-April-2023)
   
+# community
+- [query syntax validator: python package based on dry-run](https://github.com/tunnelWithAC/python-bigquery-validator)
