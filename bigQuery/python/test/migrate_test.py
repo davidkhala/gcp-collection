@@ -1,6 +1,6 @@
 import unittest
 
-from migrate.create_migration_workflow import create_migration_workflow
+from migrate.workflow import Workflow, SourceDialect
 
 project_id = 'gcp-data-davidkhala'
 
@@ -14,7 +14,9 @@ class MigrateTestCase(unittest.TestCase):
         gcs_target_path = 'bq-migrate/1679986012789199394-2bqejsz713k7a/translated'
 
         workflow_name = 'demo-cust'
-        create_migration_workflow(gcs_source_path, gcs_target_path, project_id, workflow_name)
+        workflow = Workflow(SourceDialect.Bteq, workflow_name)
+        _id = workflow.create(gcs_source_path, gcs_target_path, project_id)
+        print(_id)
 
 
 if __name__ == '__main__':
