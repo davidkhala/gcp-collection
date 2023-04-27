@@ -1,4 +1,11 @@
 # Table
+## External table
+- No clustering and partitioning
+- Lower Performance
+  - Since your file are parsed on the fly (with type casting) -> the processing time is slower
+  - You can't control/limit the volume of data that your process.
+- possible errors in file that will break your query
+
 ## [Object table (preview)](https://cloud.google.com/bigquery/docs/object-table-introduction)
 read-only tables over unstructured data objects that reside in Cloud Storage
 
