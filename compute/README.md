@@ -15,3 +15,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCI8w/vxh7NOolYz+ss7FF+/yU9XQjVHMUOzs6krF6z
 Then the user name for ssh login is `ssh-key-2020-12-20` than `ubuntu`
 You can check this in instace Details -- SSH Keys
 ![image](https://user-images.githubusercontent.com/7227589/168241771-8a94556a-9243-43b2-b98a-cc746329fcea.png)
+## Transfer files
+`gcloud compute scp`
+- [To Linux](https://cloud.google.com/compute/docs/instances/transfer-files)
+- [To Windows](https://cloud.google.com/compute/docs/instances/transfer-files-windows)
