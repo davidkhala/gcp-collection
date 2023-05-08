@@ -1,4 +1,4 @@
-import {Query} from "../query.js";
+import {Query} from "../query/query.js";
 
 describe('query', function () {
     this.timeout(0)

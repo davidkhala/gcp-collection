@@ -1,5 +1,4 @@
 import {Dataset} from '../dataset.js'
-import {Query} from '../query.js'
 import assert from "assert";
 
 describe('syntax', function () {
