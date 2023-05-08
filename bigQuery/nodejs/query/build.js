@@ -23,23 +23,19 @@ ${this.sql}`
 }
 
 export class Load {
-    // TODO
-    to(path) {
-        return `LOAD DATA {OVERWRITE|INTO} [[project_name.]dataset_name.]table_name
-[(
-  column[, ...]
-)]
-[PARTITION BY partition_expression]
-[CLUSTER BY clustering_column_list]
-[OPTIONS (table_option_list)]
-FROM FILES(load_option_list)
-[WITH PARTITION COLUMNS
-  [(partition_column_list)]
-]
-[WITH CONNECTION connection_name]
+    constructor(...uris) {
+        this.uris = uris
+    }
 
-column_list: column[, ...]
+    to(table_name, dataset_name, project_name) {
+        const target = [table_name]
+        dataset_name && target.unshift(dataset_name)
+        project_name && target.unshift(project_name)
 
-partition_column_list: partition_column_name, partition_column_type[, ...]`
+        return `LOAD DATA ${this.overwrite ? 'OVERWRITE' : 'INTO'} ${target.join('.')}
+FROM FILES(
+    format='CSV',
+    uris=[${this.uris.map(uri => `gs://${uri}.csv`)}]
+)`
     }
 }
