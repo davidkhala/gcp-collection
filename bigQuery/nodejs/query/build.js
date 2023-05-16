@@ -1,3 +1,5 @@
+import assert from "assert";
+
 export class Export {
 
     constructor(selectStatement) {
@@ -6,19 +8,19 @@ export class Export {
 
     /**
      *
-     * @param path can be a Single wildcard URI. See in https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files
+     * @param uri
      * @returns {string}
      */
-    to(path) {
+    to(uri) {
+        assert.ok(uri.includes('*'), 'The uri option must be a single-wildcard URI.\nSee in https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_option_list')
         return `EXPORT DATA
 OPTIONS (
-    uri='gs://${path}.csv',
+    uri='gs://${uri}.csv',
     format='CSV',
     header=${(!!this.header)},
     overwrite=${(!!this.overwrite)}
 ) AS
 ${this.sql}`
-
     }
 }
 
