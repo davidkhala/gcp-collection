@@ -1,5 +1,5 @@
 import {Query} from "../query/query.js";
-import {Export} from '../query/build.js'
+import {Export, Import} from '../query/build.js'
 
 describe('sample public data', function () {
     this.timeout(0)
@@ -14,10 +14,17 @@ describe('sample public data', function () {
         console.debug(await query.query(publicSetSQL))
         console.debug(await query.query(privateSetSQL))
     })
-    it('export: bug design in query builder', async () => {
-        const path = 'bq-migrate/query-builder-*'
+    it('export: buggy single-wildcard-uri design in query builder', async () => {
+        const path = 'bq-migrate/query-builder/*'
         const exportQuery = new Export(privateSetSQL).to(path)
         console.debug(exportQuery)
         await query.query(exportQuery)
+    })
+
+    it('import', async () => {
+        const path =`bq-migrate/query-builder/000000000000`
+        const importQuery = new Import(path).to('country_codes2', 'dbt_davidkhala', 'gcp-data-davidkhala')
+        console.debug(importQuery)
+        await query.query(importQuery)
     })
 })

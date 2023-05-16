@@ -24,7 +24,7 @@ ${this.sql}`
     }
 }
 
-export class Load {
+export class Import {
     constructor(...uris) {
         this.uris = uris
     }
@@ -37,7 +37,7 @@ export class Load {
         return `LOAD DATA ${this.overwrite ? 'OVERWRITE' : 'INTO'} ${target.join('.')}
 FROM FILES(
     format='CSV',
-    uris=[${this.uris.map(uri => `gs://${uri}.csv`)}]
+    uris=[${this.uris.map(uri => `'gs://${uri}.csv'`)}]
 )`
     }
 }
