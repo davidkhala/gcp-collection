@@ -8,6 +8,7 @@ https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compres
   - JSON: raw, GZIP
   - Avro: DEFLATE, SNAPPY	
   - Parquet:  SNAPPY, GZIP
+  - Arrow: API with [java sample](https://cloud.google.com/bigquery/docs/samples/bigquerystorage-arrow-quickstart)
 ## Method
 https://cloud.google.com/bigquery/docs/exporting-data#exporting_data_stored_in
 - Cloud Console
