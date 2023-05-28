@@ -17,6 +17,8 @@ from syntax import NameEnum
 
 from google.cloud import bigquery_migration_v2
 
+from common import GCP
+
 
 class SourceDialect(NameEnum):
     Teradata = auto()
@@ -35,16 +37,14 @@ class SourceDialect(NameEnum):
     Postgresql = auto()
 
 
-class Workflow:
-    def __init__(self, dialect: SourceDialect,
-                 name='demo-workflow-python-example', location='asia-southeast1'):
-        self.name = name
-        self.location = location
+class Workflow(GCP):
+    def __init__(self, dialect: SourceDialect, project_id: str, name: str):
+        super().__init__(project_id, name)
         self.dialect = dialect
 
-    def create(self, gcs_input_path: str, gcs_output_path: str, project_id: str) -> str:
+    def create(self, gcs_input_path: str, gcs_output_path: str) -> str:
         """Creates a migration workflow of a Batch SQL Translation and return the id."""
-        parent = f"projects/{project_id}/locations/{self.location}"
+        parent = f"projects/{self.project_id}/locations/{self.location}"
 
         # Construct a BigQuery Migration client object.
         client = bigquery_migration_v2.MigrationServiceClient()
@@ -87,6 +87,6 @@ class Workflow:
             migration_workflow=workflow,
         )
 
-        response = client.create_migration_workflow(request=request)
+        _migrationWorkflow = client.create_migration_workflow(request=request)
 
-        return response.name
+        return _migrationWorkflow.name

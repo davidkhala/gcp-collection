@@ -14,8 +14,8 @@ class MigrateTestCase(unittest.TestCase):
         gcs_target_path = 'bq-migrate/1679986012789199394-2bqejsz713k7a/translated'
 
         workflow_name = 'demo-cust'
-        workflow = Workflow(SourceDialect.Bteq, workflow_name)
-        _id = workflow.create(gcs_source_path, gcs_target_path, project_id)
+        workflow = Workflow(SourceDialect.Bteq, project_id, workflow_name)
+        _id = workflow.create(gcs_source_path, gcs_target_path)
         print(_id)
 
 
