@@ -6,11 +6,13 @@ from common import GCP
 
 
 class Export(GCP):
-    def __init__(self, project_id: str):
+    def __init__(self, dataset: str, project_id: str):
         super().__init__(project_id)
+        self._dataFrame = None
+        self.dataset = dataset
 
-    def exec(self, dataset: str, table: str, columns: list[str], where: str):
-        table = f"projects/{self.project_id}/datasets/{dataset}/tables/{table}"
+    def from_table(self, table: str, columns: list[str], where: str):
+        table = f"projects/{self.project_id}/datasets/{self.dataset}/tables/{table}"
         client = BigQueryReadClient()
 
         read_options = ReadSession.TableReadOptions(
@@ -30,5 +32,10 @@ class Export(GCP):
             max_stream_count=1,
         )
         reader = client.read_rows(session.streams[0].name)
-        df = reader.to_dataframe(session)
-        print(df.head())
+        self._dataFrame = reader.to_dataframe()
+
+    def to_gcs(self, path: str):
+        self._dataFrame.to_csv(f"gs://{path}.csv")
+
+    def print(self):
+        print(self._dataFrame.head())

@@ -38,7 +38,7 @@ class SourceDialect(NameEnum):
 
 
 class Workflow(GCP):
-    def __init__(self, dialect: SourceDialect, project_id: str, name: str):
+    def __init__(self, dialect: SourceDialect,name: str,  project_id: str):
         super().__init__(project_id)
         self.name = name
         self.dialect = dialect

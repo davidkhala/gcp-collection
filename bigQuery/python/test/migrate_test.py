@@ -4,7 +4,8 @@ from migrate.export import Export
 from migrate.workflow import Workflow, SourceDialect
 
 project_id = 'gcp-data-davidkhala'
-datasets = ['dbt_davidkhala','translate']
+datasets = ['dbt_davidkhala', 'translate']
+
 
 class MigrateTestCase(unittest.TestCase):
     def test_on_davidkhala(self):
@@ -15,17 +16,23 @@ class MigrateTestCase(unittest.TestCase):
         gcs_target_path = 'bq-migrate/1679986012789199394-2bqejsz713k7a/translated'
 
         workflow_name = 'demo-cust'
-        workflow = Workflow(SourceDialect.Bteq, project_id, workflow_name)
+        workflow = Workflow(SourceDialect.Bteq, workflow_name, project_id)
         _id = workflow.create(gcs_source_path, gcs_target_path)
         print(_id)
 
 
 class ExportTestCase(unittest.TestCase):
     def test_dbt(self):
-        export = Export(project_id)
+        export = Export(datasets[0], project_id)
         table = 'country_codes'
         columns = ['country_code', 'country_name']
-        export.exec(datasets[0], table, columns, '')
+        export.from_table(table, columns, '')
+        export.to_gcs('bq-migrate/country_codes')
+        # now the output csv looks like:
+        #     ,country_code,country_name
+        #      0,US,United States
+        #      1,CA,Canada
+        #      2,GB,United Kingdom
 
 
 if __name__ == '__main__':
