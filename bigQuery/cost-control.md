@@ -5,12 +5,14 @@ https://cloud.google.com/bigquery/docs/best-practices-costs
 BigQuery does a full scan of every column in the table.
 
 - Helpless solutions include
-  - Apply a `LIMIT` clause
+  - For non-clustered tables, apply a `LIMIT` clause
 - Helpful solutions
   - use `SELECT * EXCEPT` to exclude one or more columns from the results.
   - Materializing results in a destination table and querying that table instead.
   - [Partitioning your tables](https://cloud.google.com/bigquery/docs/creating-partitioned-tables) and querying the relevant partition. 
     - For example, use `WHERE _PARTITIONDATE="2017-01-01"` to query only the January 1, 2017 partition.
+  - Use clustered tables
+    - If the query includes a filter on the clustered columns, then BigQuery uses the filter expression and the block metadata to prune the blocks scanned by the query.
 ## Exploring your data
 Don't run queries to explore or preview table data.
 - Helpful solutions
@@ -26,3 +28,8 @@ Before running queries, preview them to estimate costs.
   - Perform a dry run by using the:
     - `--dry_run` flag in the `bq` command-line tool
     - `dryRun` parameter when submitting a query job using the API
+
+## From operation
+- Using the pricing calculator
+- Use the maximum bytes billed setting to limit query costs.
+- 
