@@ -10,7 +10,9 @@ packages = [{ include = "migrate" }]
 python = "^3.11"
 google-cloud-bigquery-migration = "^0.11.0"
 khala-python-utils = "^0.0.2"
-
+google-cloud-bigquery-storage = "2.19.1"
+pandas = "2.0.1"
+pyarrow = "12.0.0"
 [tool.poetry.group.dev.dependencies]
 setuptools = "^67.7.2"
 [build-system]
