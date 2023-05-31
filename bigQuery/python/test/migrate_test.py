@@ -27,12 +27,9 @@ class ExportTestCase(unittest.TestCase):
         table = 'country_codes'
         columns = ['country_code', 'country_name']
         export.from_table(table, columns, '')
-        export.to_gcs('bq-migrate/country_codes')
-        # now the output csv looks like:
-        #     ,country_code,country_name
-        #      0,US,United States
-        #      1,CA,Canada
-        #      2,GB,United Kingdom
+        gcs_target = 'bq-migrate/country_codes'
+        export.print()
+
 
 
 if __name__ == '__main__':

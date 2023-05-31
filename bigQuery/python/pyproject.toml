@@ -12,10 +12,7 @@ google-cloud-bigquery-migration = "^0.11.0"
 khala-python-utils = "^0.0.2"
 
 google-cloud-bigquery-storage = "2.19.1" # export bigquery table to arrow
-pandas = "2.0.1" # export bigquery table to arrow
 pyarrow = "12.0.0" # export bigquery table to arrow
-fsspec = "2023.5.0" # export bigquery table to arrow
-gcsfs = "2023.5.0" # export bigquery table to arrow
 
 [tool.poetry.group.dev.dependencies]
 setuptools = "^67.7.2"

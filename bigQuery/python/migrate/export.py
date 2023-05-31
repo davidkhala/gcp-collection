@@ -8,7 +8,7 @@ from common import GCP
 class Export(GCP):
     def __init__(self, dataset: str, project_id: str):
         super().__init__(project_id)
-        self._dataFrame = None
+        self._arrow = None
         self.dataset = dataset
 
     def from_table(self, table: str, columns: list[str], where: str):
@@ -31,11 +31,11 @@ class Export(GCP):
             # It's possible to have more than one stream
             max_stream_count=1,
         )
+        # Each response contains one or more table rows, up to a maximum of 10 MiB per response
         reader = client.read_rows(session.streams[0].name)
-        self._dataFrame = reader.to_dataframe()
-
-    def to_gcs(self, path: str):
-        self._dataFrame.to_csv(f"gs://{path}.csv")
+        self._arrow = reader.to_arrow()
 
     def print(self):
-        print(self._dataFrame.head())
+        print(self._arrow)
+    def to_json(self):
+        return self._arrow.to_pydict()
