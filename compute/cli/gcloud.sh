@@ -3,20 +3,9 @@ get-ip() {
     gcloud compute instances describe ${instance_name} --zone=${zone} --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
 }
 
-wait4ssh() {
+wait-until-ssh() {
     local instance_name=$1
-    
-    local counter=0
-    while true; do
-        if gcloud compute ssh ${instance_name} --zone=${zone} --quiet --command="true" 2> /dev/null; then
-            exit 0
-        else
-            ((counter++))
-            sleep 1
-            echo ${counter} times retry
-        fi
-
-    done
+    curl -sSL https://raw.githubusercontent.com/davidkhala/linux-utils/main/wait-until.sh | sudo bash -s gcloud compute ssh ${instance_name} --zone=${zone} --quiet --command="true" 2> /dev/null
 }
 delete-vm() {
     local instance_name=$1
