@@ -5,11 +5,10 @@ get-ip() {
 
 wait4ssh() {
     local instance_name=$1
-    ip=$(get-ip $instance_name)
+    
     local counter=0
     while true; do
-
-        if nc -w 1 -z $ip 22; then
+        if gcloud compute ssh ${instance_name} --zone=${zone} --quiet --command="true" 2> /dev/null; then
             exit 0
         else
             ((counter++))
