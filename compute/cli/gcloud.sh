@@ -5,7 +5,7 @@ get-ip() {
 
 wait-until-ssh() {
     local instance_name=$1
-    curl -sSL https://raw.githubusercontent.com/davidkhala/linux-utils/main/wait-until.sh | sudo bash -s gcloud compute ssh ${instance_name} --zone=${zone} --quiet --command="true" 2> /dev/null
+    curl -sSL https://raw.githubusercontent.com/davidkhala/linux-utils/main/wait-until.sh | bash -s gcloud compute ssh ${instance_name} --zone=${zone} --command=true
 }
 delete-vm() {
     local instance_name=$1
