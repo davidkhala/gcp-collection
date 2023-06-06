@@ -11,4 +11,10 @@ enableServices() {
     redis.googleapis.com \
     sqladmin.googleapis.com
 }
+dataProject(){
+  gcloud config set project gcp-data-davidkhala
+}
+freeProject(){
+  gcloud config set project freetier-only
+}
 $@
