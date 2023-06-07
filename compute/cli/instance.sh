@@ -5,7 +5,8 @@ get-ip() {
 
 wait-until-ssh() {
     local instance_name=$1
-    curl -sSL https://raw.githubusercontent.com/davidkhala/linux-utils/main/wait-until.sh | bash -s gcloud compute ssh ${instance_name} --zone=${zone} --command=true --quiet
+    # --quiet is useless here
+    curl -sSL https://raw.githubusercontent.com/davidkhala/linux-utils/main/wait-until.sh | bash -s gcloud compute ssh ${instance_name} --zone=${zone} --command=true
 }
 backup-vm() {
     local instance_name=$1
