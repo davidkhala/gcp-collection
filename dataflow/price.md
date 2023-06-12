@@ -9,3 +9,12 @@ Charge unit: Data Compute Units (DCUs) (batch and streaming)
 - Resources tracked by DCUs include vCPU, memory, Dataflow Shuffle data processed (for batch jobs), and Streaming Engine data processed (for streaming jobs).
 - One DCU = 1 vCPU 4 GB worker / hour / dataflow job.
 
+Hongkong DC price
+| Job Type | Data Compute Units (per DCU) |
+| -------- | ---------------------------- |
+| Batch    | $0.084                       |
+| Streaming| $0.125                       |
+
+
+
+
