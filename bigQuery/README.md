@@ -11,7 +11,7 @@ Denormalize Design: BigQuery is designed to store one large denormalized table.
 - No primary key, unique key or index column
 
 # Document Index
-- [$bq CLI](./bq.md)
+- [$bq CLI](./cli/README.md)
 - [SQL Translation](./SQL.md)
 - [Data Type](./data-type.md)
 
