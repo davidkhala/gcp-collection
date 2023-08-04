@@ -28,4 +28,7 @@ list() {
 
   gcloud auth application-default print-access-token
 }
+update() {
+  gcloud components update -q
+}
 $@
