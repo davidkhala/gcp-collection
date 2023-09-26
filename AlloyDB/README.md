@@ -1,4 +1,6 @@
-- Provision time (RPO) 15 minutes
+## provision time
+- Cluster with 1 primary instance:  15 minutes
+- Add new Read pool instance (NodeCount=1, after cluster provision): 
 # Backup
 - backup is always a full backup
 - Backup and restore are managed entirely by AlloyDB's storage layer. No impact on the read and write performance 
