@@ -5,9 +5,9 @@
 # HA
 cross-region replication: by Secondary Cluster (preview)
 ## Secondary Cluster
-A read-only cluster in a different region than the primary, that replicates from the primary cluster asynchronously.
+A read-only cluster in a different region than the primary, that replicates from the primary cluster asynchronously
 - In the event of a failure of an AlloyDB primary cluster, you can promote a secondary cluster to a primary cluster.
-
+- It cannot be in the same region as primary instance
 
 ## provision time
 - Cluster with 1 primary instance:  15 minutes
