@@ -1,6 +1,17 @@
+[Benefits](https://cloud.google.com/alloydb/docs/cross-region-replication/about-cross-region-replication#benefits)
+![image](https://github.com/davidkhala/gcp-collections/assets/7227589/f4c1cc79-5bc1-44ae-8b3e-448538a3ee9f)
+
+
+# HA
+cross-region replication: by Secondary Cluster (preview)
+## Secondary Cluster
+A read-only cluster in a different region than the primary, that replicates from the primary cluster asynchronously.
+- In the event of a failure of an AlloyDB primary cluster, you can promote a secondary cluster to a primary cluster.
+
+
 ## provision time
 - Cluster with 1 primary instance:  15 minutes
-- Add new Read pool instance (NodeCount=1, after cluster provision): 
+- Add new Read pool instance (NodeCount=1, after cluster provision): 8 minutes
 # Backup
 - backup is always a full backup
 - Backup and restore are managed entirely by AlloyDB's storage layer. No impact on the read and write performance 
