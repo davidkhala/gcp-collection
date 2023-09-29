@@ -7,6 +7,7 @@
 - RTO follows [CloudSQL](https://services.google.com/fh/files/misc/resiliency_with_cloud_sql_whitepaper.pdf
   - RTO = 1 minute for Instance Failure
   - RTO = several minutes for Zone Failure
+- Primary instance Failover: 2 minutes 
 ## Secondary Cluster
 A read-only cluster in a different region than the primary, that replicates from the primary cluster asynchronously
 - In the event of a failure of an AlloyDB primary cluster, you can promote a secondary cluster to a primary cluster.
