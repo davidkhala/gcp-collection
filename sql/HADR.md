@@ -8,6 +8,11 @@
 - One additional automated backup is taken after your instance is stopped (to safeguard all changes prior to the instance stopping)
 - 1-365 backups are retained, 7 by default.
 
-## export to GCS (object storage)
+## export
 - [pg_dump: postgre native tool](https://cloud.google.com/sql/docs/postgres/import-export/import-export-dmp)
+  - operation runtime: undefined
+  - target: runtime disk
 - [SQL dump](https://cloud.google.com/sql/docs/postgres/import-export/import-export-sql#export-sql-dump-file)
+  - operation runtime: GCP managed, instructed by web Console
+  - target: GCS
+  - Same as Export as CSV
