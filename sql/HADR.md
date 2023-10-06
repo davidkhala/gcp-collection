@@ -9,4 +9,5 @@
 - 1-365 backups are retained, 7 by default.
 
 ## export to GCS (object storage)
-- https://cloud.google.com/sql/docs/postgres/import-export/import-export-dmp
+- [pg_dump: postgre native tool](https://cloud.google.com/sql/docs/postgres/import-export/import-export-dmp)
+- [SQL dump](https://cloud.google.com/sql/docs/postgres/import-export/import-export-sql#export-sql-dump-file)
