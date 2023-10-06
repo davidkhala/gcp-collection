@@ -8,3 +8,5 @@
 - One additional automated backup is taken after your instance is stopped (to safeguard all changes prior to the instance stopping)
 - 1-365 backups are retained, 7 by default.
 
+## export to GCS (object storage)
+- https://cloud.google.com/sql/docs/postgres/import-export/import-export-dmp
