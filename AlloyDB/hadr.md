@@ -27,4 +27,4 @@ AlloyDB lets you restore an existing cluster to any moment from its recent histo
 - Retention period: up to one year
 
 # Dump
-by `pg_dump`
+- [by `pg_dump`](https://cloud.google.com/alloydb/docs/export-dmp-file)
