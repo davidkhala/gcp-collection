@@ -20,7 +20,8 @@ Denormalize Design: BigQuery is designed to store one large denormalized table.
   - AVRO, JSON NL, CSV files
   - Google Cloud Datastore backup 
 - Google Sheets (first tab only)
-- If native support is not yet available for the BI layer in use, Google has partnered with [Simba Technologies](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to provide ODBC and JDBC drivers
+- If native support is not yet available for the BI layer in use, Google has partnered with [Simba Technologies](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to provide ODBC and JDBC drivers. This extends connection support including
+  - MS Excel (preferred than [bigquery-connector-for-excel](https://cloud.google.com/bigquery/docs/bigquery-connector-for-excel))
 
 
 
