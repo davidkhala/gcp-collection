@@ -1,6 +1,7 @@
 # Cloud Run
 ## Cloud Run for Anthos
 https://cloud.google.com/anthos/run
+- not support for GKE Autopilot clusters
 
 ## Dependency
 Build from source
