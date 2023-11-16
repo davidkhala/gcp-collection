@@ -18,3 +18,10 @@ Advanced API Security
 - continually monitors your APIs to protect them from security threats, including attacks from malicious clients and abuse.
 - analyzes your API traffic to identify suspicious API requests, and provides tools to block or flag those requests if you decide to do so.
 - In addition, Advanced API Security evaluates your API configurations to ensure they meet security standards, and gives you recommendations for improving them if needed.
+
+### [Features](https://cloud.google.com/apigee/docs/api-security#advanced-api-security-features)
+Advanced API Security uses the following process to protect your APIs:
+1. API Security collects data for recent traffic passing through your APIs.
+2. API Security analyzes the data to detect unusual traffic patterns that indicate a threat to your APIs.
+3. API Security presents the results of the analysis in **Abuse detection | Security reports | Risk assessment** pages in the Apigee UI:
+4. After reviewing the analysis, you can choose to block or flag requests from specific IP addresses using the **security actions** page. You can also create **security alerts**, which notify you of events related to API security.
