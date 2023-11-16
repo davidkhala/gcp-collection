@@ -12,6 +12,8 @@ If we need internet access, below is required additional information.
 - fine grain: you can enable the Apigee API Analytics add-on at an *environment* level
 - 
 ## Advanced API Security
+![image](https://github.com/davidkhala/gcp-collections/assets/7227589/c57b73c1-1362-47ba-b2cc-1e1cb94f1417)
+
 Advanced API Security 
 - continually monitors your APIs to protect them from security threats, including attacks from malicious clients and abuse.
 - analyzes your API traffic to identify suspicious API requests, and provides tools to block or flag those requests if you decide to do so.
