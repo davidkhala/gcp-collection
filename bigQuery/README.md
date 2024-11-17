@@ -10,6 +10,8 @@ Denormalize Design: BigQuery is designed to store one large denormalized table.
 - less Join
 - No primary key, unique key or index column
 
+Dremel is the query engine
+
 # Document Index
 - [$bq CLI](./cli/README.md)
 - [SQL Translation](./SQL.md)
