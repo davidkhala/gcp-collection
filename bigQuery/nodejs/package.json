@@ -1,8 +1,12 @@
 {
   "name": "@davidkhala/bq",
   "version": "0.0.0-alpha",
+  "scripts": {
+    "test": "mocha test"
+  },
   "dependencies": {
-    "@google-cloud/bigquery": "latest"
+    "@google-cloud/bigquery": "latest",
+    "@davidkhala/gcp-format": "latest"
   },
   "devDependencies": {
     "mocha": "latest"

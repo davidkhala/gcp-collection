@@ -1,5 +1,6 @@
 import {Dataset} from '../dataset.js'
 import assert from "assert";
+import {BigQuery} from "../index.js";
 
 describe('syntax', function () {
 
@@ -12,7 +13,8 @@ describe('syntax', function () {
 });
 describe('lifecycle', function () {
     this.timeout(0)
-    const dataset = new Dataset('nodejs_sdk_dev')
+    const bq = new BigQuery({apiKey: process.env.API_KEY})
+    const dataset = new Dataset('nodejs_sdk_dev', bq)
     it('connect', async () => {
         console.debug(await dataset.connect())
     })
