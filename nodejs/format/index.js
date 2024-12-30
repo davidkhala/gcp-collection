@@ -1,27 +1,31 @@
 export default class GCPClass {
     /**
-     *
-     * @param [projectId]
-     * @param [client_email]
-     * @param [private_key]
+     * @type {GCPClient}
      */
-    constructor(projectId, client_email, private_key) {
+    client
+    /**
+     * @type {GoogleAuthOptions}
+     */
+    auth
 
-        if (client_email && private_key) {
-            this.credentials = {
-                client_email,
-                private_key,
-            }
-        }
-
-        this.projectId = projectId
+    /**
+     *
+     * @param {GoogleAuthOptions} auth
+     */
+    constructor(auth) {
+        this.auth = auth;
     }
 
     as(ClientClass) {
-        this.client = new ClientClass(this);
-        return this
+        this.client = new ClientClass(this.auth);
     }
 
+    get projectId(){
+        return this.auth.projectId;
+    }
+    set projectId(projectId) {
+        this.auth.projectId = projectId;
+    }
     async connect() {
         if (this.projectId) {
             await this.client.initialize() // assert-like. Will not prompt if no projectId in context
