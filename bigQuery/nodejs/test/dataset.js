@@ -16,10 +16,10 @@ describe('lifecycle', function () {
 
     const dataset = new Dataset('nodejs_sdk_dev', bq)
     it('connect', async () => {
-        console.debug(await dataset.connect())
+        await dataset.connect()
     })
     it('create', async () => {
-        console.debug(await dataset.create())
+        await dataset.create()
     })
     it('delete', async () => {
         await dataset.delete()

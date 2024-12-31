@@ -1,5 +1,6 @@
 import {Export, Import} from "../query/build.js";
-
+import {getInstance} from "../test/bq.js";
+const bq = getInstance()
 describe('', function (){
     this.timeout(0);
     const privateSetSQL = 'select * from `gcp-data-davidkhala.dbt_davidkhala.country_codes`'

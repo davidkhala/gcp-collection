@@ -7,8 +7,14 @@ export class BigQuery extends GCPClass {
      */
     client
     constructor(auth) {
+        if(auth.apiKey){
+            throw Error("BigQuery does not support access via API keys for authentication")
+        }
         super(auth);
         this.client = new BQ(this.auth)
+    }
+    async connect(){
+        await this.client.getDatasets()
     }
 
     async query(sql) {

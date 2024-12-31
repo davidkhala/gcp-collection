@@ -9,22 +9,46 @@ export class Dataset {
         this.dataset = bigquery.client.dataset(id);
     }
 
-    get bigquery(){
+    get bigquery() {
         return this.dataset.bigQuery
     }
+
     async connect() {
+        await this.exist()
+    }
+
+    async exist() {
+        const [exist] = await this.dataset.exists()
+        return exist
+    }
+
+    async get() {
+        if (!await this.exist()) {
+            return
+        }
         const [dataset] = await this.dataset.get()
         this.dataset = dataset
         return dataset
     }
 
+    async ensure() {
+        const [dataset] = await this.dataset.get({autoCreate: true})
+        this.dataset = dataset
+    }
+
     async create() {
-        const opts = {}
-        return await this.dataset.create(opts)
+        if (await this.exist()) {
+            return
+        }
+        const [dataset] = await this.dataset.create({})
+        this.dataset = dataset
     }
 
     async delete() {
-        return await this.dataset.delete()
+        if (await this.exist()) {
+            return await this.dataset.delete()
+        }
+
     }
 }
 
