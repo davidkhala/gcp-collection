@@ -1,19 +1,19 @@
 import {Dataset} from '../dataset.js'
 import assert from "assert";
-import {BigQuery} from "../index.js";
-
+import {getInstance} from "./bq.js";
+const bq = getInstance()
 describe('syntax', function () {
 
     it('id convention', async () => {
 
-        assert.throws(() => new Dataset('nodejs-sdk-dev'))
-        assert.doesNotThrow(() => new Dataset('nodejs_sdk_dev'))
+        assert.throws(() => new Dataset('nodejs-sdk-dev', bq))
+        assert.doesNotThrow(() => new Dataset('nodejs_sdk_dev', bq))
     })
 
 });
 describe('lifecycle', function () {
     this.timeout(0)
-    const bq = new BigQuery({apiKey: process.env.API_KEY})
+
     const dataset = new Dataset('nodejs_sdk_dev', bq)
     it('connect', async () => {
         console.debug(await dataset.connect())
