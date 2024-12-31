@@ -1,6 +1,6 @@
 {
   "name": "@davidkhala/bq",
-  "version": "0.0.0-alpha",
+  "version": "0.0.0",
   "scripts": {
     "test": "mocha test"
   },
@@ -11,5 +11,8 @@
   "devDependencies": {
     "mocha": "latest"
   },
-  "type": "module"
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  }
 }
