@@ -1,11 +1,11 @@
 name: nodejs tests
 on: push
 jobs:
-  format:
+  common:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: nodejs/format
+        working-directory: nodejs
     steps:
       - uses: actions/setup-node@main
         with:
