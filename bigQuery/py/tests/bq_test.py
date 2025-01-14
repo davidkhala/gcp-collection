@@ -3,7 +3,7 @@ import unittest
 from google.cloud.bigquery_storage_v1 import BigQueryReadClient
 
 from davidkhala.gcp.bq import BigQuery
-
+from tests.ci import credential
 
 class SyntaxTestCase(unittest.TestCase):
     def test_parse_path(self):
@@ -20,11 +20,10 @@ class SyntaxTestCase(unittest.TestCase):
 
 
     def test_credential(self):
-        from tests.ci import credential
         credential()
     def test_BigQuery(self):
         bq = BigQuery(credential())
-        bq.
+        # TODO WIP
 
 
 if __name__ == '__main__':

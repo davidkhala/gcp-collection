@@ -3,6 +3,7 @@ on: push
 jobs:
   core:
     runs-on: ubuntu-latest
+    environment: data
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/poetry-buildpack@main
@@ -11,4 +12,4 @@ jobs:
           test-entry-point: pytest --ignore=adc/
           working-directory: py
         env:
-          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
