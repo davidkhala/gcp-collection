@@ -13,12 +13,6 @@ google-auth = "*"
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 
-[tool.poetry.scripts]
-test = "pytest:main"
-[tool.pytest.ini_options]
-addopts = [
-    "--ignore=tests/adc/",
-]
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

@@ -14,7 +14,8 @@ class SyntaxTestCase(unittest.TestCase):
             private_key=os.environ.get('PRIVATE_KEY'),
         )
         self.assertEqual(str(type(o.credentials)), "<class 'google.oauth2.service_account.Credentials'>")
-
+    def test_always_green(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()
