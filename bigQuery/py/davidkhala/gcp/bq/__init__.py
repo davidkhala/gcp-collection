@@ -1,4 +1,4 @@
-from davidkhala.gcp import AuthOptions
+from davidkhala.gcp.auth.options import AuthOptions
 from google.cloud.bigquery_storage import BigQueryReadClient
 
 

@@ -1,10 +1,10 @@
 import google.auth
 from google.oauth2 import service_account, credentials
 
-from davidkhala.gcp.auth import ServiceAccountInfo
+from davidkhala.gcp.auth import ServiceAccountInfo, OptionsInterface
 
 
-class AuthOptions:
+class AuthOptions(OptionsInterface):
     credentials: service_account.Credentials | credentials.Credentials
     """
     :type credentials: service_account.Credentials | credentials.Credentials
