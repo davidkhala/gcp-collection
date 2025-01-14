@@ -1,6 +1,6 @@
 import unittest
 
-from davidkhala.gcp import AuthOptions
+from davidkhala.gcp.auth import AuthOptions
 
 
 class SyntaxTestCase(unittest.TestCase):

@@ -11,33 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from enum import auto
-
-from syntax import NameEnum
 
 from google.cloud import bigquery_migration_v2
 
-from common import GCP
+from davidkhala.gcp.bq import BigQuery
+
+from davidkhala.gcp.bq.migrate import SourceDialect
 
 
-class SourceDialect(NameEnum):
-    Teradata = auto()
-    Redshift = auto()
-    Bteq = auto()
-    Oracle = auto()
-    HiveQL = auto()
-    SparkSQL = auto()
-    Snowflake = auto()
-    Netezza = auto()
-    AzureSynapse = auto()
-    Vertica = auto()
-    SQLServer = auto()
-    Presto = auto()
-    MySQL = auto()
-    Postgresql = auto()
-
-
-class Workflow(GCP):
+class Workflow(BigQuery):
     def __init__(self, dialect: SourceDialect,name: str,  project_id: str):
         super().__init__(project_id)
         self.name = name

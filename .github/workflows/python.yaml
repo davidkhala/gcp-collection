@@ -8,7 +8,7 @@ jobs:
       - uses: davidkhala/poetry-buildpack@main
         with:
           tests: py/tests
-          test-entry-point: pytest --ignore=tests/adc
+          test-entry-point: pytest --ignore=adc/
           working-directory: py
         env:
           PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}

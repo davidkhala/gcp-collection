@@ -1,7 +1,7 @@
 import unittest
 
 from davidkhala.gcp.bq.migrate.export import Export
-from migrate.workflow import Workflow, SourceDialect
+from davidkhala.gcp.bq.migrate.workflow import Workflow, SourceDialect
 
 project_id = 'gcp-data-davidkhala'
 datasets = ['dbt_davidkhala', 'translate']

@@ -9,16 +9,16 @@ from davidkhala.gcp.bq import BigQuery
 class Export(BigQuery):
 
 
-    def from_table(self, table: str, columns: list[str], where: str)->pyarrow.Table:
-        table = f"projects/{self.project_id}/datasets/{self.dataset}/tables/{table}"
-        client = BigQueryReadClient()
+    def from_table(self, columns: list[str], where: str)->pyarrow.Table:
+
+        client = self.client
 
         read_options = ReadSession.TableReadOptions(
             selected_fields=columns,
             row_restriction=where
         )
         read_session = ReadSession(
-            table=table,
+            table=self.table_path,
             data_format=DataFormat.ARROW,
             read_options=read_options,
         )

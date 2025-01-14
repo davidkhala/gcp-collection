@@ -29,7 +29,7 @@ class AuthOptions:
         return c
 
     @staticmethod
-    def from_service_account(info: ServiceAccountInfo = None, *, client_email, private_key, project_id):
+    def from_service_account(info: ServiceAccountInfo = None, *, client_email, private_key, project_id=None):
         if not info:
             info = {
                 'client_email': client_email,
@@ -37,6 +37,9 @@ class AuthOptions:
             }
         if project_id:
             info['project_id'] = project_id
+
+        if not info.get('project_id'):
+            info['project_id'] = info.get('client_email').split('@')[1].split('.')[0]
 
         info['token_uri'] = "https://oauth2.googleapis.com/token"
 

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "davidkhala.bq"
+name = "davidkhala.gcp.bq"
 version = "0.0.0"
 description = ""
 authors = ["David Liu <david-khala@hotmail.com>"]
@@ -8,16 +8,20 @@ packages = [{ include = "davidkhala" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-google-cloud-bigquery-migration = "*"
-davidkhala-utils = "*"
 
-google-cloud-bigquery-storage = "*" # export bigquery table to arrow
-pyarrow = "*" # export bigquery table to arrow
+davidkhala-utils = "*"
+davidkhala-gcp = "*"
+google-cloud-bigquery-storage = "*"
+
+# For extras
+google-cloud-bigquery-migration = { version = "*", optional = true }
+pyarrow = { version = "*", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 
 [tool.poetry.extras]
+migration = ['google-cloud-bigquery-migration']
 export = ["google-cloud-bigquery-storage", "pyarrow"] # export bigquery table to arrow
 [build-system]
 requires = ["poetry-core"]
