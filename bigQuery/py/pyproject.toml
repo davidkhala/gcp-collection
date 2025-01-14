@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "davidkhala.bq"
+version = "0.0.0"
+description = ""
+authors = ["David Liu <david-khala@hotmail.com>"]
+readme = "README.md"
+packages = [{ include = "davidkhala" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+google-cloud-bigquery-migration = "*"
+davidkhala-utils = "*"
+
+google-cloud-bigquery-storage = "*" # export bigquery table to arrow
+pyarrow = "*" # export bigquery table to arrow
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+
+[tool.poetry.extras]
+export = ["google-cloud-bigquery-storage", "pyarrow"] # export bigquery table to arrow
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

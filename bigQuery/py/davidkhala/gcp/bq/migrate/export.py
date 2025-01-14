@@ -1,17 +1,15 @@
+import pyarrow
 from google.cloud.bigquery_storage import BigQueryReadClient
 
 from google.cloud.bigquery_storage_v1.types import ReadSession, DataFormat
 
-from common import GCP
+from davidkhala.gcp.bq import BigQuery
 
 
-class Export(GCP):
-    def __init__(self, dataset: str, project_id: str):
-        super().__init__(project_id)
-        self._arrow = None
-        self.dataset = dataset
+class Export(BigQuery):
 
-    def from_table(self, table: str, columns: list[str], where: str):
+
+    def from_table(self, table: str, columns: list[str], where: str)->pyarrow.Table:
         table = f"projects/{self.project_id}/datasets/{self.dataset}/tables/{table}"
         client = BigQueryReadClient()
 
@@ -33,9 +31,4 @@ class Export(GCP):
         )
         # Each response contains one or more table rows, up to a maximum of 10 MiB per response
         reader = client.read_rows(session.streams[0].name)
-        self._arrow = reader.to_arrow()
-
-    def print(self):
-        print(self._arrow)
-    def to_json(self):
-        return self._arrow.to_pydict()
+        return reader.to_arrow()

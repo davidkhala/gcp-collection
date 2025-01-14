@@ -2,16 +2,13 @@ name: python tests
 on: push
 jobs:
   core:
-    # TODO use davidkhala/poetry-buildpack
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: py
     steps:
       - uses: actions/checkout@main
-      - name: Install Poetry
-        uses: snok/install-poetry@main
-      - name: Install dependencies
-        run: poetry install --all-extras
-      - run: poetry run pytest
-        working-directory: test
+      - uses: davidkhala/poetry-buildpack@main
+        with:
+          tests: py/tests
+          test-entry-point: test
+          working-directory: py
+        env:
+          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
