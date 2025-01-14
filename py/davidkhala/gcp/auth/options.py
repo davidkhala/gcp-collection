@@ -1,21 +1,25 @@
+from typing import TypeVar, Generic
+
 import google.auth
+from google.auth.credentials import CredentialsWithQuotaProject
 from google.oauth2 import service_account, credentials
 
-from davidkhala.gcp.auth import ServiceAccountInfo, OptionsInterface
+from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo
+
+GenericCredentials = TypeVar('GenericCredentials', bound=CredentialsWithQuotaProject)
 
 
-class AuthOptions(OptionsInterface):
-    credentials: service_account.Credentials | credentials.Credentials
+class AuthOptions(OptionsInterface, Generic[GenericCredentials]):
+    credentials: GenericCredentials
     """
     :type credentials: service_account.Credentials | credentials.Credentials
     being as google.oauth2.credentials.Credentials when get from Application Default Credentials (ADC)
     raw secret not cached in credentials object. You need cache it by yourself.  
     """
-    projectId: str
 
     @staticmethod
     def default():
-        c = AuthOptions()
+        c = AuthOptions[credentials.Credentials]()
         c.credentials, c.projectId = google.auth.default()
         return c
 
@@ -34,7 +38,8 @@ class AuthOptions(OptionsInterface):
 
         info['token_uri'] = "https://oauth2.googleapis.com/token"
 
-        c = AuthOptions()
+        c = AuthOptions[service_account.Credentials]()
+
         c.credentials = service_account.Credentials.from_service_account_info(info)
         c.projectId = info['project_id']
         return c

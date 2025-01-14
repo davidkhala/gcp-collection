@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from dataclasses import dataclass
 from typing import TypedDict, NotRequired
 
@@ -12,12 +12,5 @@ class ServiceAccountInfo(TypedDict):
 
 
 class OptionsInterface(ABC):
-    @property
-    @abstractmethod
-    def credentials(self):
-        pass
-
-    @abstractmethod
-    @property
-    def projectId(self):
-        pass
+    credentials:any
+    projectId:str
