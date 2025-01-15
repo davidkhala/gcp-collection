@@ -1,6 +1,6 @@
 import os
 
-from davidkhala.gcp import AuthOptions
+from davidkhala.gcp.auth.options import AuthOptions
 
 
 def credential():

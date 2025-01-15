@@ -1,7 +1,8 @@
 import unittest
 
-from davidkhala.gcp.bq.migrate.export import Export
+from davidkhala.gcp.bq.export import Export
 from davidkhala.gcp.bq.migrate.workflow import Workflow, SourceDialect
+from tests.ci import credential
 
 project_id = 'gcp-data-davidkhala'
 datasets = ['dbt_davidkhala', 'translate']
@@ -23,10 +24,10 @@ class MigrateTestCase(unittest.TestCase):
 
 class ExportTestCase(unittest.TestCase):
     def test_dbt(self):
-        export = Export(datasets[0], project_id)
-        table = 'country_codes'
-        columns = ['country_code', 'country_name']
-        export.from_table(table, columns, '')
+        export = Export(credential())
+        export.of(table_id='gcp-data-davidkhala.dbt_davidkhala.country_codes')
+
+        export.as_arrow()
         gcs_target = 'bq-migrate/country_codes'
         export.print()
 

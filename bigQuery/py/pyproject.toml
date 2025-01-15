@@ -9,19 +9,20 @@ packages = [{ include = "davidkhala" }]
 [tool.poetry.dependencies]
 python = "^3.10"
 
-davidkhala-utils = "*"
 davidkhala-gcp = "*"
 google-cloud-bigquery-storage = "*"
 
 # For extras
+davidkhala-utils = { version = "*", optional = true }
 google-cloud-bigquery-migration = { version = "*", optional = true }
 pyarrow = { version = "*", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
+davidkhala-gcp = { version = "*", extras = ["auth"] }
 
 [tool.poetry.extras]
-migration = ['google-cloud-bigquery-migration']
+migration = ['google-cloud-bigquery-migration', 'davidkhala-utils']
 export = ["google-cloud-bigquery-storage", "pyarrow"] # export bigquery table to arrow
 [build-system]
 requires = ["poetry-core"]
