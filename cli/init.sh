@@ -18,7 +18,7 @@ freeProject() {
   gcloud config set project freetier-only
 }
 
-desktop(){
+desktop() {
   # Interactive
   gcloud init
 }
