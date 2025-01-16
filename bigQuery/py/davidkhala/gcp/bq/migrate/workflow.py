@@ -20,13 +20,14 @@ from davidkhala.gcp.bq.migrate import SourceDialect
 
 
 class Workflow(BigQuery):
-    def __init__(self, dialect: SourceDialect,name: str,  project_id: str):
-        super().__init__(project_id)
-        self.name = name
-        self.dialect = dialect
+    name: str
+    dialect: SourceDialect
 
     def create(self, gcs_input_path: str, gcs_output_path: str) -> str:
-        """Creates a migration workflow of a Batch SQL Translation and return the id."""
+        """
+        Creates a migration workflow of a Batch SQL Translation and return the id.
+        TODO make this generic from BTEQ
+        """
         parent = f"projects/{self.project_id}/locations/{self.location}"
 
         # Construct a BigQuery Migration client object.
@@ -46,21 +47,20 @@ class Workflow(BigQuery):
 
         # Prepare the config proto.
         translation_config = bigquery_migration_v2.TranslationConfigDetails(
-            gcs_source_path='gs://' + gcs_input_path,
-            gcs_target_path='gs://' + gcs_output_path,
+            gcs_source_path="gs://" + gcs_input_path,
+            gcs_target_path="gs://" + gcs_output_path,
             source_dialect=source_dialect,
             target_dialect=target_dialect,
         )
 
         # Prepare the task.
         migration_task = bigquery_migration_v2.MigrationTask(
-            type_=f"Translation_{self.dialect.value}2BQ", translation_config_details=translation_config
+            type_=f"Translation_{self.dialect.value}2BQ",
+            translation_config_details=translation_config,
         )
 
         # Prepare the workflow.
-        workflow = bigquery_migration_v2.MigrationWorkflow(
-            display_name=self.name
-        )
+        workflow = bigquery_migration_v2.MigrationWorkflow(display_name=self.name)
 
         workflow.tasks["translation-task"] = migration_task  # type: ignore
 
