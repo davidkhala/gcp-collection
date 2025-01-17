@@ -1,9 +1,10 @@
 import re
 from abc import abstractmethod
-from typing import Dict
+from typing import Dict, Iterable
 
 from davidkhala.gcp.auth import OptionsInterface
 from google.cloud.bigquery import Client, DatasetReference
+from google.cloud.bigquery.table import RowIterator, Row
 
 
 class BigQueryInterface:
@@ -45,6 +46,8 @@ class BigQuery(BigQueryInterface):
         super().__init__(auth)
         self.client = Client(auth.projectId, auth.credentials)
 
+    def query(self, query: str, **options)-> RowIterator|Iterable[Row]:
+        return self.client.query_and_wait(query, **options)
     @property
     def table_path(self):
         return DatasetReference(self.project, self.dataset).table(self.table).path

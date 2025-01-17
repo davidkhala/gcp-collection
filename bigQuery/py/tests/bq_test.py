@@ -19,7 +19,17 @@ class SyntaxTestCase(unittest.TestCase):
                          bq.table_path)
 
 
-class LiveTestCase(unittest.TestCase):
+class CoreTestCase(unittest.TestCase):
+    bq = BigQuery(credential()).of(table_id=table_id)
+
+    def test_query(self):
+        rows = self.bq.query(f"select * from {table_id}")
+
+        for row in rows:
+            print(row)
+
+
+class StreamTestCase(unittest.TestCase):
     def test_read_stream(self):
         bq = BigQueryStream(credential()).of(table_id=table_id)
         session = bq.create_read_session(DataFormat.ARROW)
