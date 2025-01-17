@@ -1,14 +1,12 @@
 from typing import Iterator
 
-import pyarrow
-from google.cloud.bigquery_storage_v1.reader import ReadRowsStream
-from google.cloud.bigquery_storage_v1.types import ReadSession, DataFormat
+from google.cloud.bigquery.client import pyarrow
+from google.cloud.bigquery_storage import ReadSession, DataFormat, ReadRowsStream
 
-from davidkhala.gcp.bq import BigQuery
+from davidkhala.gcp.bq.stream import BigQueryStream
 
 
-class Export(BigQuery):
-
+class ArrowStream(BigQueryStream):
     def as_arrow(
         self, *, read_options: ReadSession.TableReadOptions = None
     ) -> Iterator[pyarrow.Table]:
