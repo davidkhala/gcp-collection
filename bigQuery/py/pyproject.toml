@@ -10,23 +10,21 @@ packages = [{ include = "davidkhala" }]
 python = "^3.10"
 
 davidkhala-gcp = "*"
-google-cloud-bigquery = [
-    { markers = "extra == 'stream'", version = "*", extras = ["bqstorage"] },
-    { markers = "extra != 'stream'", version = "*" }
-]
+google-cloud-bigquery ="*"
 
 
 # For extras
 davidkhala-utils = { version = "*", optional = true }
 google-cloud-bigquery-migration = { version = "*", optional = true }
-
+google-cloud-bigquery-storage = { version = "*", optional = true }
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 davidkhala-gcp = { version = "*", extras = ["auth"] }
 
 [tool.poetry.extras]
 migration = ['google-cloud-bigquery-migration', 'davidkhala-utils']
-stream = ['google-cloud-bigquery']
+stream = ['google-cloud-bigquery-storage']
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

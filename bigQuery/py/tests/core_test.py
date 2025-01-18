@@ -1,5 +1,6 @@
 import unittest
 
+from google.cloud.bigquery import DestinationFormat, DatasetReference
 from google.cloud.bigquery_storage import BigQueryReadClient, DataFormat
 
 from davidkhala.gcp.bq import BigQuery
@@ -17,6 +18,10 @@ class SyntaxTestCase(unittest.TestCase):
         bq = BigQuery(credential()).of(table_id=table_id)
         self.assertEqual("/" + BigQueryReadClient.table_path(bq.project, bq.dataset, bq.table),
                          bq.table_path)
+        self.assertNotEqual(DatasetReference(bq.project, bq.dataset).table(bq.table).table_id, bq.table_id)
+
+
+from google.cloud.bigquery.table import Row
 
 
 class CoreTestCase(unittest.TestCase):
@@ -26,14 +31,13 @@ class CoreTestCase(unittest.TestCase):
         rows = self.bq.query(f"select * from {table_id}")
 
         for row in rows:
+            self.assertIsInstance(row, Row)
             print(row)
 
-
-class StreamTestCase(unittest.TestCase):
-    def test_read_stream(self):
-        bq = BigQueryStream(credential()).of(table_id=table_id)
-        session = bq.create_read_session(DataFormat.ARROW)
-        print(session.name)
+    def test_export(self):
+        bucket = 'davidkhala-data'
+        self.bq.export(DestinationFormat.AVRO, bucket=bucket)
+        self.bq.export(DestinationFormat.PARQUET, bucket=bucket)
 
 
 if __name__ == '__main__':
