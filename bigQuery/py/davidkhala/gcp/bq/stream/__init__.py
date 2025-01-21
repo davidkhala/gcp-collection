@@ -1,6 +1,8 @@
-from typing import Iterator
+from typing import Iterator, Tuple
 
-from davidkhala.gcp.auth.options import AuthOptions
+import pyarrow
+import pandas
+from davidkhala.gcp.auth import OptionsInterface
 from google.cloud.bigquery_storage import BigQueryReadClient, BigQueryWriteClient, DataFormat, ReadSession
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
 
@@ -11,7 +13,7 @@ class BigQueryStream(BigQueryInterface):
     read_client: BigQueryReadClient
     write_client: BigQueryWriteClient
 
-    def __init__(self, auth: AuthOptions):
+    def __init__(self, auth: OptionsInterface):
         super().__init__(auth)
         self.client = BigQueryReadClient(credentials=auth.credentials)
 
@@ -41,8 +43,10 @@ class BigQueryStream(BigQueryInterface):
             }),
         )
 
-    def read(self, session: ReadSession) -> Iterator[ReadRowsIterable]:
+    def read(self, session: ReadSession) -> Iterator[Tuple[ReadRowsIterable, pyarrow.Table, pandas.DataFrame]]:
         from google.cloud.bigquery_storage import ReadRowsStream
         for stream in session.streams:
             reader: ReadRowsStream = self.client.read_rows(stream.name)
-            yield reader.rows(session)
+            yield (reader.rows(session),
+                   session.data_format == DataFormat.ARROW and reader.to_arrow(session),
+                   reader.to_dataframe(session))

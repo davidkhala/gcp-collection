@@ -17,18 +17,20 @@ class StreamTestCase(unittest.TestCase):
         session = self.bq.create_read_session(DataFormat.ARROW)
         self.assertIsInstance(session, ReadSession)
         self.assertTrue(session.name.startswith('projects/gcp-data-davidkhala/locations/us/sessions/'))
-        for rows in self.bq.read(session):
+        for rows, _arrow, _ in self.bq.read(session):
             self.assertIsInstance(rows, ReadRowsIterable)
+            self.assertIsInstance(_arrow, pyarrow.Table)
             for row in rows:
                 self.assertIsInstance(row, dict)
                 print(row)
                 self.assertIsInstance(row['country_code'], pyarrow.StringScalar)
                 self.assertIsInstance(row['country_name'], pyarrow.StringScalar)
 
-    def test_arvo_stream(self):
+    def test_avro_stream(self):
         session = self.bq.create_read_session(DataFormat.AVRO)
-        for rows in self.bq.read(session):
+        for rows, _arrow, _ in self.bq.read(session):
             self.assertIsInstance(rows, ReadRowsIterable)
+            self.assertFalse(_arrow)
             for row in rows:
                 self.assertIsInstance(row, dict)
                 print(row)

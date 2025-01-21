@@ -13,3 +13,15 @@ jobs:
           working-directory: py
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  bq:
+    runs-on: ubuntu-latest
+    environment: data
+    steps:
+      - uses: actions/checkout@main
+      - uses: davidkhala/poetry-buildpack@main
+        with:
+          tests: bigQuery/py/tests
+          test-entry-point: pytest
+          working-directory: bigQuery/py
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
