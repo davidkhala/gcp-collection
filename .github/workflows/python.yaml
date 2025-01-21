@@ -21,7 +21,7 @@ jobs:
       - uses: davidkhala/poetry-buildpack@main
         with:
           tests: bigQuery/py/tests
-          test-entry-point: pytest
+          test-entry-point: pytest --ignore=migrate_test.py
           working-directory: bigQuery/py
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}

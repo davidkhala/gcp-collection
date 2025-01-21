@@ -11,65 +11,56 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from google.cloud import bigquery_migration_v2
+from davidkhala.gcp.auth import OptionsInterface
+from google.cloud.bigquery_migration import Dialect, MigrationServiceClient, BigQueryDialect, TranslationConfigDetails
+from google.cloud.bigquery_migration import MigrationTask, MigrationWorkflow
 
 from davidkhala.gcp.bq import BigQuery
-
-from davidkhala.gcp.bq.migration import SourceDialect
 
 
 class Workflow(BigQuery):
     name: str
-    dialect: SourceDialect
+    dialect: Dialect
+    client: MigrationServiceClient
+    location: str
+
+    def __init__(self, auth: OptionsInterface):
+        super().__init__(auth)
+        self.client = MigrationServiceClient(credentials=auth.credentials)
 
     def create(self, gcs_input_path: str, gcs_output_path: str) -> str:
         """
-        Creates a migration workflow of a Batch SQL Translation and return the id.
-        TODO make this generic from BTEQ
+        Creates a migration workflow of a Batch SQL Translation
+        :param gcs_input_path:
+        :param gcs_output_path:
+        :return: workflow id
         """
-        parent = f"projects/{self.project_id}/locations/{self.location}"
-
-        # Construct a BigQuery Migration client object.
-        client = bigquery_migration_v2.MigrationServiceClient()
-
-        # Set the source dialect to Teradata SQL.
-        source_dialect = bigquery_migration_v2.Dialect()
-
-        # always use BTEQ mode (which includes SQL).
-        source_dialect.teradata_dialect = bigquery_migration_v2.TeradataDialect(
-            mode=bigquery_migration_v2.TeradataDialect.Mode.BTEQ
-        )
-
-        # Set the target dialect to BigQuery dialect.
-        target_dialect = bigquery_migration_v2.Dialect()
-        target_dialect.bigquery_dialect = bigquery_migration_v2.BigQueryDialect()
+        parent = f"projects/{self.project}/locations/{self.location}"
 
         # Prepare the config proto.
-        translation_config = bigquery_migration_v2.TranslationConfigDetails(
-            gcs_source_path="gs://" + gcs_input_path,
-            gcs_target_path="gs://" + gcs_output_path,
-            source_dialect=source_dialect,
-            target_dialect=target_dialect,
-        )
-
-        # Prepare the task.
-        migration_task = bigquery_migration_v2.MigrationTask(
-            type_=f"Translation_{self.dialect.value}2BQ",
-            translation_config_details=translation_config,
-        )
+        translation_config = TranslationConfigDetails({
+            "gcs_source_path": "gs://" + gcs_input_path,
+            "gcs_target_path": "gs://" + gcs_output_path,
+            "source_dialect": self.dialect,
+            "target_dialect": Dialect({
+                "bigquery_dialect": BigQueryDialect()
+            }),
+        })
 
         # Prepare the workflow.
-        workflow = bigquery_migration_v2.MigrationWorkflow(display_name=self.name)
+        workflow = MigrationWorkflow({
+            "display_name": self.name,
+            "tasks": {
+                "translation-task": MigrationTask({
+                    "type_": f"Translation_{self.dialect.value}2BQ",
+                    "translation_config_details": translation_config,
+                })
+            }
+        })
 
-        workflow.tasks["translation-task"] = migration_task  # type: ignore
-
-        # Prepare the API request to create a migration workflow.
-        request = bigquery_migration_v2.CreateMigrationWorkflowRequest(
+        _migrationWorkflow = self.client.create_migration_workflow(
             parent=parent,
             migration_workflow=workflow,
         )
-
-        _migrationWorkflow = client.create_migration_workflow(request=request)
 
         return _migrationWorkflow.name
