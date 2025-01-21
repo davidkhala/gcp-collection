@@ -13,8 +13,16 @@ class SyntaxTestCase(unittest.TestCase):
             private_key=os.environ.get('PRIVATE_KEY'),
         )
         self.assertEqual(str(type(o.credentials)), "<class 'google.oauth2.service_account.Credentials'>")
-    def test_always_green(self):
-        pass
+
+    def test_from_api_key(self):
+        from google.cloud.compute import RegionsClient
+        api_key = os.environ.get('API_KEY')
+        client = RegionsClient(
+            client_options=AuthOptions.from_api_key(api_key)
+        )
+        for region in client.list(project='gcp-data-davidkhala'):
+            print(region.name)
+
 
 if __name__ == '__main__':
     unittest.main()

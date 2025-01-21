@@ -15,6 +15,7 @@ auth = ["google-auth"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
+google-cloud-compute = "*"
 
 [build-system]
 requires = ["poetry-core"]

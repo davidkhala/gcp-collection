@@ -13,6 +13,7 @@ jobs:
           working-directory: py
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          API_KEY: ${{secrets.API_KEY}}
   bq:
     runs-on: ubuntu-latest
     environment: data

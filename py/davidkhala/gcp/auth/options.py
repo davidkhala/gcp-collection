@@ -43,3 +43,10 @@ class AuthOptions(OptionsInterface, Generic[GenericCredentials]):
         c.credentials = service_account.Credentials.from_service_account_info(info)
         c.projectId = info['project_id']
         return c
+
+    @staticmethod
+    def from_api_key(api_key: str, client_options=None) -> dict:
+        if client_options is None:
+            client_options = {}
+        client_options["api_key"] = api_key
+        return client_options
