@@ -15,13 +15,22 @@ class SyntaxTestCase(unittest.TestCase):
         self.assertEqual(str(type(o.credentials)), "<class 'google.oauth2.service_account.Credentials'>")
 
     def test_from_api_key(self):
-        from google.cloud.compute import RegionsClient
+        from google.cloud.language import LanguageServiceClient, Document
         api_key = os.environ.get('API_KEY')
-        client = RegionsClient(
+        client = LanguageServiceClient(
             client_options=AuthOptions.from_api_key(api_key)
         )
-        for region in client.list(project='gcp-data-davidkhala'):
-            print(region.name)
+        text = "Hello, world!"
+        document = Document(
+            content=text, type_=Document.Type.PLAIN_TEXT
+        )
+
+        # Make a request to analyze the sentiment of the text.
+        sentiment = client.analyze_sentiment(
+            request={"document": document}
+        ).document_sentiment
+
+        self.assertEqual(sentiment.score, sentiment.magnitude)
 
 
 if __name__ == '__main__':

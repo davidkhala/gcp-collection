@@ -17,9 +17,11 @@ google-cloud-bigquery = "*"
 davidkhala-utils = { version = "*", optional = true }
 google-cloud-bigquery-migration = { version = "*", optional = true }
 google-cloud-bigquery-storage = { version = "*", optional = true, extras = ["pyarrow", "fastavro", "pandas"] }
+
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 davidkhala-gcp = { version = "*", extras = ["auth"] }
+davidkhala-data-format = "*"
 
 [tool.poetry.extras]
 migration = ['google-cloud-bigquery-migration', 'davidkhala-utils']
