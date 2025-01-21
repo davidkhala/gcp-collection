@@ -16,7 +16,7 @@ from google.cloud import bigquery_migration_v2
 
 from davidkhala.gcp.bq import BigQuery
 
-from davidkhala.gcp.bq.migrate import SourceDialect
+from davidkhala.gcp.bq.migration import SourceDialect
 
 
 class Workflow(BigQuery):

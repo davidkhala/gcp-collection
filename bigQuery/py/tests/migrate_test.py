@@ -1,7 +1,7 @@
 import unittest
 
 from davidkhala.gcp.bq.export import Export
-from davidkhala.gcp.bq.migrate.workflow import Workflow, SourceDialect
+from davidkhala.gcp.bq.migration.workflow import Workflow, SourceDialect
 from tests.ci import credential
 
 project_id = "gcp-data-davidkhala"

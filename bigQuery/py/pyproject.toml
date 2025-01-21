@@ -10,13 +10,13 @@ packages = [{ include = "davidkhala" }]
 python = "^3.10"
 
 davidkhala-gcp = "*"
-google-cloud-bigquery ="*"
+google-cloud-bigquery = "*"
 
 
 # For extras
 davidkhala-utils = { version = "*", optional = true }
 google-cloud-bigquery-migration = { version = "*", optional = true }
-google-cloud-bigquery-storage = { version = "*", optional = true }
+google-cloud-bigquery-storage = { version = "*", optional = true, extras = ["pyarrow", "fastavro"] }
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 davidkhala-gcp = { version = "*", extras = ["auth"] }

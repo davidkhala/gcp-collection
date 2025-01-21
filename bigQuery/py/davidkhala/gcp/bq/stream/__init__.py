@@ -1,12 +1,15 @@
+from typing import Iterator
+
 from davidkhala.gcp.auth.options import AuthOptions
 from google.cloud.bigquery_storage import BigQueryReadClient, BigQueryWriteClient, DataFormat, ReadSession
+from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
 
 from davidkhala.gcp.bq import BigQueryInterface
 
 
 class BigQueryStream(BigQueryInterface):
-    read: BigQueryReadClient
-    write: BigQueryWriteClient
+    read_client: BigQueryReadClient
+    write_client: BigQueryWriteClient
 
     def __init__(self, auth: AuthOptions):
         super().__init__(auth)
@@ -19,12 +22,11 @@ class BigQueryStream(BigQueryInterface):
         return r
 
     def create_read_session(self, data_format: DataFormat,
-                            *, session_options: dict = None, max_stream_count=1):
+                            *, session_options: dict = None) -> ReadSession:
         """
 
         :param data_format:
         :param session_options:
-        :param max_stream_count: Each response stream contains one or more table rows, up to a maximum of 10 MiB per response
         :return:
         """
         if session_options is None:
@@ -37,5 +39,10 @@ class BigQueryStream(BigQueryInterface):
                 "data_format": data_format,
                 **session_options
             }),
-            max_stream_count=max_stream_count,
         )
+
+    def read(self, session: ReadSession) -> Iterator[ReadRowsIterable]:
+        from google.cloud.bigquery_storage import ReadRowsStream
+        for stream in session.streams:
+            reader: ReadRowsStream = self.client.read_rows(stream.name)
+            yield reader.rows(session)
