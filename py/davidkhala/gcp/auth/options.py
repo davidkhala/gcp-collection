@@ -1,8 +1,7 @@
 import google.auth
+from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo, CredentialsInterface
 from google.auth.credentials import Credentials, CredentialsWithQuotaProject, TokenState
 from google.oauth2 import service_account
-
-from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo
 
 
 class _Options(OptionsInterface):
@@ -17,14 +16,14 @@ class _Options(OptionsInterface):
 
 
 class ServiceAccount(_Options):
-    credentials: service_account.Credentials
+    credentials: service_account.Credentials | CredentialsInterface
 
 
 class ADC(_Options):
-    credentials: Credentials
+    credentials: Credentials | CredentialsInterface
 
 
-default_scopes = ['googleapis.com/auth/cloud-platform', ]
+default_scopes = ['googleapis.com/auth/cloud-platform']
 """
 [Oauth 2.0 Scopes](https://developers.google.com/identity/protocols/oauth2/scopes)
 """
@@ -40,12 +39,11 @@ def default(scopes=None) -> ADC:
 
 
 def from_service_account(info: ServiceAccountInfo = None, *,
-                         client_email, private_key, project_id=None,
-                         scopes=None
+                         client_email=None, private_key=None, project_id=None, scopes=None
                          ) -> ServiceAccount:
     if scopes is None:
         scopes = default_scopes
-    scopes = map(lambda scope: 'https://www.' + scope, scopes)
+    scopes = list(map(lambda scope: 'https://www.' + scope, scopes))
     if not info:
         info = {
             'client_email': client_email,

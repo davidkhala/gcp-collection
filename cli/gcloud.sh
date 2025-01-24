@@ -8,13 +8,10 @@ loginServiceAccount() {
 }
 logout() {
   gcloud auth revoke
-  gcloud auth application-default revoke
 }
 listAccounts() {
   # lists credentialed accounts
-  gcloud auth list # not showing application-default credential
-
-  gcloud auth application-default print-access-token
+  gcloud auth list
 }
 update() {
   gcloud components update -q
