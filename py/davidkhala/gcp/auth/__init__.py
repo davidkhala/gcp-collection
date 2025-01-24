@@ -1,6 +1,6 @@
-from abc import ABC
 from dataclasses import dataclass
-from typing import TypedDict, NotRequired
+from datetime import datetime
+from typing import TypedDict, NotRequired, Optional
 
 
 @dataclass
@@ -11,6 +11,17 @@ class ServiceAccountInfo(TypedDict):
     project_id: NotRequired[str]
 
 
-class OptionsInterface(ABC):
-    credentials:any
-    projectId:str
+class CredentialsInterface:
+    token: Optional[str]
+    """
+    The bearer token that can be used in HTTP headers to make authenticated requests.
+    """
+    expiry: datetime
+
+
+class OptionsInterface:
+    credentials: CredentialsInterface
+    """
+    raw secret not cached in credentials object. You need cache it by yourself.
+    """
+    projectId: str
