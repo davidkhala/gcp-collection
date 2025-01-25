@@ -3,7 +3,6 @@
 set -e
 setup() {
   # Interactive
-
   gcloud auth application-default login
   project=$(gcloud config get-value project)
   if [ -z "$project" ]; then

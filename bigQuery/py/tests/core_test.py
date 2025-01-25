@@ -1,10 +1,10 @@
 import unittest
 
 from google.cloud.bigquery import DestinationFormat, DatasetReference
-from google.cloud.bigquery_storage import BigQueryReadClient, DataFormat
+from google.cloud.bigquery.table import Row
+from google.cloud.bigquery_storage import BigQueryReadClient
 
 from davidkhala.gcp.bq import BigQuery
-from davidkhala.gcp.bq.stream import BigQueryStream
 from tests.ci import credential
 
 table_id = 'gcp-data-davidkhala.dbt_davidkhala.country_codes'
@@ -19,9 +19,6 @@ class SyntaxTestCase(unittest.TestCase):
         self.assertEqual("/" + BigQueryReadClient.table_path(bq.project, bq.dataset, bq.table),
                          bq.table_path)
         self.assertNotEqual(DatasetReference(bq.project, bq.dataset).table(bq.table).table_id, bq.table_id)
-
-
-from google.cloud.bigquery.table import Row
 
 
 class CoreTestCase(unittest.TestCase):

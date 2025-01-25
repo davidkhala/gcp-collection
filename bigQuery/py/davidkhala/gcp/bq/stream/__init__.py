@@ -47,6 +47,8 @@ class BigQueryStream(BigQueryInterface):
         from google.cloud.bigquery_storage import ReadRowsStream
         for stream in session.streams:
             reader: ReadRowsStream = self.client.read_rows(stream.name)
-            yield (reader.rows(session),
-                   session.data_format == DataFormat.ARROW and reader.to_arrow(session),
-                   reader.to_dataframe(session))
+            yield (
+                reader.rows(session),
+                session.data_format == DataFormat.ARROW and reader.to_arrow(session),
+                reader.to_dataframe(session)
+            )
