@@ -3,13 +3,29 @@ from typing import Iterator, Tuple
 import pyarrow
 import pandas
 from davidkhala.gcp.auth import OptionsInterface
-from google.cloud.bigquery_storage import BigQueryReadClient, BigQueryWriteClient, DataFormat, ReadSession
+from google.cloud.bigquery_storage import (BigQueryReadClient, BigQueryWriteClient, DataFormat, ReadRowsStream,
+                                           ReadSession as BigQueryReadSession)
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
 
 from davidkhala.gcp.bq import BigQueryInterface
 
 
-class BigQueryStream(BigQueryInterface):
+class ReadSession:
+    session: BigQueryReadSession
+
+    def read(self, session: BigQueryReadSession) -> Iterator[Tuple[ReadRowsIterable, pyarrow.Table, pandas.DataFrame]]:
+        for stream in session.streams:
+            reader: ReadRowsStream = self.client.read_rows(stream.name)
+            yield (
+                reader.rows(session),
+                session.data_format == DataFormat.ARROW and reader.to_arrow(session),
+                reader.to_dataframe(session)
+            )
+    # TODO
+    # def extract_tables(iterator: Iterator[Tuple[ReadRowsIterable, pa.Table, pd.DataFrame]]) -> Iterator[pa.Table]:
+    #     return (item[1] for item in iterator)
+
+class Stream(BigQueryInterface):
     read_client: BigQueryReadClient
     write_client: BigQueryWriteClient
 
@@ -34,21 +50,13 @@ class BigQueryStream(BigQueryInterface):
         if session_options is None:
             session_options = {}
         assert data_format != DataFormat.DATA_FORMAT_UNSPECIFIED
-        return self.client.create_read_session(
+        _ = ReadSession()
+        _.session = self.client.create_read_session(
             parent=BigQueryReadClient.common_project_path(self.project),
-            read_session=ReadSession({
+            read_session=BigQueryReadSession({
                 "table": self.table_path,
                 "data_format": data_format,
                 **session_options
             }),
         )
-
-    def read(self, session: ReadSession) -> Iterator[Tuple[ReadRowsIterable, pyarrow.Table, pandas.DataFrame]]:
-        from google.cloud.bigquery_storage import ReadRowsStream
-        for stream in session.streams:
-            reader: ReadRowsStream = self.client.read_rows(stream.name)
-            yield (
-                reader.rows(session),
-                session.data_format == DataFormat.ARROW and reader.to_arrow(session),
-                reader.to_dataframe(session)
-            )
+        return _
