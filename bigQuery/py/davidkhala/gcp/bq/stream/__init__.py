@@ -7,6 +7,7 @@ from google.cloud.bigquery_storage import (BigQueryReadClient, BigQueryWriteClie
                                            ReadRowsResponse,
                                            ReadSession as BigQueryReadSession)
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
+
 from davidkhala.gcp.bq import BigQueryInterface
 
 
@@ -17,6 +18,10 @@ class ReadSession:
     @property
     def rows(self) -> Iterator[Iterator[ReadRowsResponse] | ReadRowsStream]:
         return (self.client.read_rows(stream.name) for stream in self.session.streams)
+
+    @property
+    def count(self):
+        return len(self.session.streams)
 
     @property
     def arvo(self) -> Iterator[Iterator[Mapping|dict]|ReadRowsIterable]:

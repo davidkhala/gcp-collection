@@ -1,6 +1,5 @@
 import unittest
 
-import pyarrow
 from davidkhala.data.format.arrow.gcp import GCS
 from google.api_core.exceptions import PermissionDenied
 from google.cloud.bigquery_storage import DataFormat
@@ -23,25 +22,31 @@ class SyntaxTestCase(unittest.TestCase):
 class ArrowTestCase(unittest.TestCase):
     gcs = GCS(credentials=auth_options.credentials)
 
-    def test_stream(self):
+    def test_write_stream(self):
         bq = Stream(auth_options).of(table_id='gcp-data-davidkhala.dbt_davidkhala.country_codes')
         session = bq.create_read_session(DataFormat.ARROW)
 
         uri = "gs://davidkhala-data/gcp-data-davidkhala.dbt_davidkhala.country_codes.arrow"
-        for arrowTable in session.arrow:
-            self.assertIsInstance(arrowTable, pyarrow.Table)
-
-        # TODO WIP
-        # self.gcs.write_stream(uri, _arrow)
+        self.gcs.write_stream(uri, session.arrow)
 
 
 class PublicDatasetTestCase(unittest.TestCase):
-    def test_read_session(self):
+    gcs = GCS(credentials=auth_options.credentials)
+
+    def test_read_directly(self):
         bq = Stream(auth_options).of(table_id="bigquery-public-data.baseball.games_wide")
         self.assertRaisesRegex(PermissionDenied,
                                "403 request failed: the user does not have 'bigquery.readsessions.create' permission for 'projects/bigquery-public-data'",
                                lambda: bq.create_read_session(DataFormat.ARROW)
                                )
+
+    def test_arrow_write_stream(self):
+        bq = Stream(auth_options).of(table_id="gcp-data-davidkhala.baseball.games_wide")
+        session = bq.create_read_session(DataFormat.ARROW)
+        uri = "gs://davidkhala-data/gcp-data-davidkhala.baseball.games_wide.arrow"
+        self.assertEqual(2, session.count)
+
+        self.gcs.write_stream(uri, session.arrow)
 
 
 class AvroTestCase(unittest.TestCase):
