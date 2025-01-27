@@ -49,7 +49,10 @@ class BigQuery(BigQueryInterface):
 
     def __init__(self, auth: OptionsInterface):
         super().__init__(auth)
-        self.client = Client(auth.projectId, auth.credentials)
+        self.client = Client(auth.projectId,
+                             credentials=auth.credentials,
+                             client_options=auth.client_options
+                             )
 
     def query(self, query: str, **options) -> Iterable[Row]:
         return self.client.query_and_wait(query, **options)

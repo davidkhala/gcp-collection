@@ -11,6 +11,11 @@ class ServiceAccountInfo(TypedDict):
     project_id: NotRequired[str]
 
 
+@dataclass
+class ClientOptions(TypedDict):
+    api_key: NotRequired[str]
+
+
 class CredentialsInterface:
     token: Optional[str]
     """
@@ -25,3 +30,4 @@ class OptionsInterface:
     raw secret not cached in credentials object. You need cache it by yourself.
     """
     projectId: str
+    client_options: ClientOptions

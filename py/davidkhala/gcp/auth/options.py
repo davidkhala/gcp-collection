@@ -1,5 +1,6 @@
 import google.auth
-from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo, CredentialsInterface
+from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo, CredentialsInterface, ClientOptions
+from google.api_core.client_options import ClientOptions as GCPClientOptions
 from google.auth.credentials import Credentials, CredentialsWithQuotaProject, TokenState
 from google.oauth2 import service_account
 
@@ -65,8 +66,13 @@ def from_service_account(info: ServiceAccountInfo = None, *,
     return c
 
 
-def from_api_key(api_key: str, client_options=None) -> dict:
+def from_api_key(api_key: str,
+                 client_options: GCPClientOptions | ClientOptions = None
+                 ) -> GCPClientOptions | ClientOptions:
     if client_options is None:
         client_options = {}
-    client_options["api_key"] = api_key
+    if isinstance(client_options, dict):
+        client_options["api_key"] = api_key
+    if isinstance(client_options, GCPClientOptions):
+        client_options.api_key = api_key
     return client_options

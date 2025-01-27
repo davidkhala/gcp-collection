@@ -2,7 +2,8 @@ import unittest
 
 import pyarrow
 from davidkhala.data.format.arrow.gcp import GCS
-from google.cloud.bigquery_storage import DataFormat, ReadSession
+from google.api_core.exceptions import PermissionDenied
+from google.cloud.bigquery_storage import DataFormat
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
 
 from ci import credential
@@ -15,8 +16,9 @@ class SyntaxTestCase(unittest.TestCase):
     def test_type(self):
         bq = Stream(auth_options).of(table_id='gcp-data-davidkhala.dbt_davidkhala.country_codes')
         session = bq.create_read_session(DataFormat.ARROW)
-        self.assertIsInstance(session, ReadSession)
-        self.assertTrue(session.name.startswith('projects/gcp-data-davidkhala/locations/us/sessions/'))
+
+        self.assertTrue(session.session.name.startswith('projects/gcp-data-davidkhala/locations/us/sessions/'))
+
 
 class ArrowTestCase(unittest.TestCase):
     gcs = GCS(credentials=auth_options.credentials)
@@ -26,18 +28,11 @@ class ArrowTestCase(unittest.TestCase):
         session = bq.create_read_session(DataFormat.ARROW)
 
         uri = "gs://davidkhala-data/gcp-data-davidkhala.dbt_davidkhala.country_codes.arrow"
-        for rows, _arrow, _ in bq.read(session):
-            self.assertIsInstance(rows, ReadRowsIterable)
-            for row in rows:
-                self.assertIsInstance(row, dict)
-                self.assertIsInstance(row['country_code'], pyarrow.StringScalar)
-                self.assertIsInstance(row['country_name'], pyarrow.StringScalar)
-            self.assertIsInstance(_arrow, pyarrow.Table)
+        for arrowTable in session.arrow:
+            self.assertIsInstance(arrowTable, pyarrow.Table)
 
-        self.gcs.write_stream(uri, _arrow)
-
-
-from google.api_core.exceptions import PermissionDenied
+        # TODO WIP
+        # self.gcs.write_stream(uri, _arrow)
 
 
 class PublicDatasetTestCase(unittest.TestCase):
@@ -54,9 +49,8 @@ class AvroTestCase(unittest.TestCase):
     def test_avro_stream(self):
         bq = Stream(auth_options).of(table_id='gcp-data-davidkhala.dbt_davidkhala.country_codes')
         session = bq.create_read_session(DataFormat.AVRO)
-        for rows, _arrow, _ in bq.read(session):
+        for rows in session.arvo:
             self.assertIsInstance(rows, ReadRowsIterable)
-            self.assertFalse(_arrow)
             for row in rows:
                 self.assertIsInstance(row, dict)
                 print(row)
