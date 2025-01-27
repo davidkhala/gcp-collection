@@ -20,11 +20,10 @@ class ReadSession:
         return (self.client.read_rows(stream.name) for stream in self.session.streams)
 
     @property
-    def count(self):
-        return len(self.session.streams)
+    def count(self): return len(self.session.streams)
 
     @property
-    def arvo(self) -> Iterator[Iterator[Mapping|dict]|ReadRowsIterable]:
+    def arvo(self) -> Iterator[Iterator[Mapping | dict] | ReadRowsIterable]:
         assert self.session.data_format == DataFormat.AVRO
         return (row.rows() for row in self.rows)
 
@@ -46,6 +45,7 @@ class Stream(BigQueryInterface):
         super().__init__(auth)
         self.read_client = BigQueryReadClient(credentials=auth.credentials, client_options=auth.client_options)
         self.write_client = BigQueryWriteClient(credentials=auth.credentials, client_options=auth.client_options)
+
     @property
     def table_path(self):
         r = BigQueryReadClient.table_path(self.project, self.dataset, self.table)

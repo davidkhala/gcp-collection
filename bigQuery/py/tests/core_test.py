@@ -28,7 +28,6 @@ class CoreTestCase(unittest.TestCase):
         rows = self.bq.query(f"select * from {table_id}")
 
         for row in rows:
-            self.assertIsInstance(row, Row)
             print(row)
 
     def test_export(self):

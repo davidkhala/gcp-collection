@@ -1,6 +1,7 @@
 import unittest
 
 from davidkhala.data.format.arrow.gcp import GCS
+from davidkhala.data.format.arrow.local_fs import LocalFS
 from google.api_core.exceptions import PermissionDenied
 from google.cloud.bigquery_storage import DataFormat
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
@@ -23,15 +24,15 @@ class ArrowTestCase(unittest.TestCase):
     gcs = GCS(credentials=auth_options.credentials)
 
     def test_write_stream(self):
-        bq = Stream(auth_options).of(table_id='gcp-data-davidkhala.dbt_davidkhala.country_codes')
+        table_id = 'gcp-data-davidkhala.dbt_davidkhala.country_codes'
+        bq = Stream(auth_options).of(table_id=table_id)
         session = bq.create_read_session(DataFormat.ARROW)
 
-        uri = "gs://davidkhala-data/gcp-data-davidkhala.dbt_davidkhala.country_codes.arrow"
-        self.gcs.write_stream(uri, session.arrow)
+        local = LocalFS()
+        local.write_stream(f"artifacts/{table_id}.arrow", session.arrow)
 
 
 class PublicDatasetTestCase(unittest.TestCase):
-    gcs = GCS(credentials=auth_options.credentials)
 
     def test_read_directly(self):
         bq = Stream(auth_options).of(table_id="bigquery-public-data.baseball.games_wide")
@@ -41,12 +42,16 @@ class PublicDatasetTestCase(unittest.TestCase):
                                )
 
     def test_arrow_write_stream(self):
-        bq = Stream(auth_options).of(table_id="gcp-data-davidkhala.baseball.games_wide")
+        table_id = "gcp-data-davidkhala.baseball.games_post_wide"
+        bq = Stream(auth_options).of(table_id=table_id)
         session = bq.create_read_session(DataFormat.ARROW)
-        uri = "gs://davidkhala-data/gcp-data-davidkhala.baseball.games_wide.arrow"
-        self.assertEqual(2, session.count)
+        file_name = f"{table_id}.arrow"
+        self.assertEqual(1, session.count)
 
-        self.gcs.write_stream(uri, session.arrow)
+        # it consumes 7sec
+        uri = f"gs://davidkhala-data/{file_name}"
+        gcs = GCS(credentials=auth_options.credentials)
+        gcs.write_stream(uri, session.arrow)
 
 
 class AvroTestCase(unittest.TestCase):
