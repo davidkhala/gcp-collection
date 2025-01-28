@@ -1,7 +1,6 @@
 import unittest
 
 from google.cloud.bigquery import DestinationFormat, DatasetReference
-from google.cloud.bigquery.table import Row
 from google.cloud.bigquery_storage import BigQueryReadClient
 
 from davidkhala.gcp.bq import BigQuery

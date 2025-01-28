@@ -20,7 +20,7 @@ google-cloud-bigquery-storage = { version = "*", optional = true, extras = ["pya
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
-davidkhala-gcp = { version = "*", extras = ["auth"] }
+davidkhala-gcp = { version = "*"}
 davidkhala-data-format = { version = "*", extras = ["gcp", "arrow"] }
 
 [tool.poetry.extras]

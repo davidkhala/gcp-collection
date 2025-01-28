@@ -21,7 +21,7 @@ class SyntaxTestCase(unittest.TestCase):
 
 
 class ArrowTestCase(unittest.TestCase):
-    gcs = GCS(credentials=auth_options.credentials)
+    gcs = GCS(auth_options=auth_options)
 
     def test_write_stream(self):
         table_id = 'gcp-data-davidkhala.dbt_davidkhala.country_codes'
@@ -50,7 +50,7 @@ class PublicDatasetTestCase(unittest.TestCase):
 
         # it consumes 7sec
         uri = f"gs://davidkhala-data/{file_name}"
-        gcs = GCS(credentials=auth_options.credentials)
+        gcs = GCS(auth_options=auth_options)
         gcs.write_stream(uri, session.arrow)
 
 

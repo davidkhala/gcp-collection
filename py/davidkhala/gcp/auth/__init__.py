@@ -15,12 +15,12 @@ class ServiceAccountInfo(TypedDict):
 
 
 class OptionsInterface:
-    credentials: Optional[CredentialsWithQuotaProject]
+    credentials: CredentialsWithQuotaProject
     """
     raw secret not cached in credentials object. You need cache it by yourself.
     """
     projectId: str
-    client_options: Optional[ClientOptions]
+    client_options: ClientOptions
 
     @property
     def token(self) -> str:

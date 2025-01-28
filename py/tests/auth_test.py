@@ -3,6 +3,7 @@ import unittest
 from datetime import datetime
 
 from google.cloud.language import LanguageServiceClient, Document
+from google.oauth2 import service_account
 
 from davidkhala.gcp.auth import OptionsInterface
 from davidkhala.gcp.auth.options import from_service_account, from_api_key
@@ -17,7 +18,7 @@ class SyntaxTestCase(unittest.TestCase):
             private_key=os.environ.get('PRIVATE_KEY'),
         )
         credentials = o.credentials
-        self.assertEqual(str(type(credentials)), "<class 'google.oauth2.service_account.Credentials'>")
+        self.assertIsInstance(credentials, service_account.Credentials)
         self.assertFalse(credentials.valid)
         self.assertIsNone(o.expiry)
         OptionsInterface.token.fget(o)
