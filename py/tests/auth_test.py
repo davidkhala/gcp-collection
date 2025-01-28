@@ -4,6 +4,7 @@ from datetime import datetime
 
 from google.cloud.language import LanguageServiceClient, Document
 
+from davidkhala.gcp.auth import OptionsInterface
 from davidkhala.gcp.auth.options import from_service_account, from_api_key
 
 
@@ -18,10 +19,10 @@ class SyntaxTestCase(unittest.TestCase):
         credentials = o.credentials
         self.assertEqual(str(type(credentials)), "<class 'google.oauth2.service_account.Credentials'>")
         self.assertFalse(credentials.valid)
-        self.assertIsNone(credentials.expiry)
-        o.token
-        self.assertIsNotNone(credentials.expiry)
-        self.assertIsInstance(credentials.expiry, datetime)
+        self.assertIsNone(o.expiry)
+        OptionsInterface.token.fget(o)
+        self.assertIsNotNone(o.expiry)
+        self.assertIsInstance(o.expiry, datetime)
 
     def test_from_api_key(self):
         api_key = os.environ.get('API_KEY')

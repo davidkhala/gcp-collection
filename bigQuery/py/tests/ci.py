@@ -1,7 +1,7 @@
 import os
 
 from davidkhala.gcp.auth import OptionsInterface
-from davidkhala.gcp.auth.options import from_service_account, default, _Options, from_api_key
+from davidkhala.gcp.auth.options import from_service_account, default, from_api_key
 
 
 def credential() -> OptionsInterface:
@@ -9,7 +9,7 @@ def credential() -> OptionsInterface:
     api_key = os.environ.get('API_KEY')
     r = OptionsInterface()
     if api_key:
-        r.client_options = from_api_key(api_key, {})
+        r.client_options = from_api_key(api_key)
     else:
         if private_key:
             r = from_service_account(
@@ -19,6 +19,5 @@ def credential() -> OptionsInterface:
         else:
             print('using ADC')
             r = default()
-        r.client_options = None
-        _Options.token.fget(r)
+        OptionsInterface.token.fget(r)
     return r

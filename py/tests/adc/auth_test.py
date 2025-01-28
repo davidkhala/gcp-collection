@@ -17,6 +17,7 @@ class SyntaxTestCase(unittest.TestCase):
         self.assertIsInstance(credentials.expiry, datetime.datetime)
         self.assertIsNotNone(credentials.expiry)
         print(o2.token)
+        self.assertEqual(credentials.token_state, TokenState.FRESH)
 
 
 if __name__ == '__main__':

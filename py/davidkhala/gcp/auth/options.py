@@ -1,27 +1,17 @@
 import google.auth
-from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo, CredentialsInterface, ClientOptions
 from google.api_core.client_options import ClientOptions as GCPClientOptions
-from google.auth.credentials import Credentials, CredentialsWithQuotaProject, TokenState
+from google.auth.credentials import Credentials
 from google.oauth2 import service_account
 
-
-class _Options(OptionsInterface):
-    credentials: CredentialsWithQuotaProject
-
-    @property
-    def token(self):
-        if self.credentials.token_state != TokenState.FRESH:
-            from google.auth.transport.requests import Request
-            self.credentials.refresh(Request())
-        return self.credentials.token
+from davidkhala.gcp.auth import OptionsInterface, ServiceAccountInfo
 
 
-class ServiceAccount(_Options):
-    credentials: service_account.Credentials | CredentialsInterface
+class ServiceAccount(OptionsInterface):
+    credentials: service_account.Credentials
 
 
-class ADC(_Options):
-    credentials: Credentials | CredentialsInterface
+class ADC(OptionsInterface):
+    credentials: Credentials
 
 
 default_scopes = ['googleapis.com/auth/cloud-platform']
@@ -66,13 +56,8 @@ def from_service_account(info: ServiceAccountInfo = None, *,
     return c
 
 
-def from_api_key(api_key: str,
-                 client_options: GCPClientOptions | ClientOptions = None
-                 ) -> GCPClientOptions | ClientOptions:
+def from_api_key(api_key: str, client_options: GCPClientOptions = None) -> GCPClientOptions:
     if client_options is None:
-        client_options = {}
-    if isinstance(client_options, dict):
-        client_options["api_key"] = api_key
-    if isinstance(client_options, GCPClientOptions):
-        client_options.api_key = api_key
+        client_options = GCPClientOptions()
+    client_options.api_key = api_key
     return client_options

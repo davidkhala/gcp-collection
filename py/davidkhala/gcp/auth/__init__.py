@@ -2,6 +2,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import TypedDict, NotRequired, Optional
 
+from google.api_core.client_options import ClientOptions
+from google.auth.credentials import CredentialsWithQuotaProject, TokenState
+
 
 @dataclass
 class ServiceAccountInfo(TypedDict):
@@ -11,23 +14,24 @@ class ServiceAccountInfo(TypedDict):
     project_id: NotRequired[str]
 
 
-@dataclass
-class ClientOptions(TypedDict):
-    api_key: NotRequired[str]
-
-
-class CredentialsInterface:
-    token: Optional[str]
-    """
-    The bearer token that can be used in HTTP headers to make authenticated requests.
-    """
-    expiry: datetime
-
-
 class OptionsInterface:
-    credentials: CredentialsInterface
+    credentials: Optional[CredentialsWithQuotaProject]
     """
     raw secret not cached in credentials object. You need cache it by yourself.
     """
     projectId: str
-    client_options: ClientOptions
+    client_options: Optional[ClientOptions]
+
+    @property
+    def token(self) -> str:
+        """
+        :return The bearer token that can be used in HTTP headers to make authenticated requests.
+        """
+        if self.credentials.token_state != TokenState.FRESH:
+            from google.auth.transport.requests import Request
+            self.credentials.refresh(Request())
+        return self.credentials.token
+
+    @property
+    def expiry(self) -> datetime:
+        return self.credentials.expiry
