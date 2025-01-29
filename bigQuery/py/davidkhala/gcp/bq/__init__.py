@@ -57,7 +57,7 @@ class BigQuery(BigQueryInterface):
     def query(self, query: str, **options) -> Iterable[Row]:
         return self.client.query_and_wait(query, **options)
 
-    def export(self, data_format: DestinationFormat, *, bucket=None, gcs_uri=None):
+    def export(self, data_format: DestinationFormat=DestinationFormat.CSV, *, bucket=None, gcs_uri=None):
         """
         A high latency but high throughput batch exporting
         :param data_format:

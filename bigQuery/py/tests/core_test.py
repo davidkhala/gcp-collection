@@ -31,6 +31,7 @@ class CoreTestCase(unittest.TestCase):
 
     def test_export(self):
         bucket = 'davidkhala-data'
+        self.bq.export(bucket=bucket)
         self.bq.export(DestinationFormat.AVRO, bucket=bucket)
         self.bq.export(DestinationFormat.PARQUET, bucket=bucket)
 

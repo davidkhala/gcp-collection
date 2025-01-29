@@ -12,6 +12,8 @@ class ServiceAccountInfo(TypedDict):
     private_key: str
     token_uri: NotRequired[str]
     project_id: NotRequired[str]
+    client_id: Optional[str] # for Apache Spark pubsub
+    private_key_id: Optional[str] # for Apache Spark pubsub
 
 
 class OptionsInterface:
