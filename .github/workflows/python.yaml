@@ -14,6 +14,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           API_KEY: ${{secrets.API_KEY}}
+          CLIENT_EMAIL : ${{ vars.CLIENT_EMAIL }}
   bq:
     runs-on: ubuntu-latest
     environment: data
@@ -26,3 +27,4 @@ jobs:
           working-directory: bigQuery/py
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          CLIENT_EMAIL : ${{ vars.CLIENT_EMAIL }}

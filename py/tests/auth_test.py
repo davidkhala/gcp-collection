@@ -13,8 +13,7 @@ class SyntaxTestCase(unittest.TestCase):
 
     def test_from_service_account(self):
         o = from_service_account(
-            client_email=os.environ.get('CLIENT_EMAIL')
-                         or 'data-integration@gcp-data-davidkhala.iam.gserviceaccount.com',
+            client_email=os.environ.get('CLIENT_EMAIL'),
             private_key=os.environ.get('PRIVATE_KEY'),
         )
         credentials = o.credentials
