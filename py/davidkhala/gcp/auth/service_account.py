@@ -6,21 +6,21 @@ from google.oauth2 import service_account
 from davidkhala.gcp.auth import OptionsInterface, default_scopes
 
 
-@dataclass
-class Info(TypedDict):
-    """
-    The service account info in Google format.
-    """
-    client_email: str
-    private_key: str
-    token_uri: NotRequired[str]
-    project_id: NotRequired[str]
-    client_id: Optional[str]  # for Apache Spark pubsub
-    private_key_id: Optional[str]  # for Apache Spark pubsub
-
-
 class ServiceAccount(OptionsInterface):
     credentials: service_account.Credentials
+
+    @dataclass
+    class Info(TypedDict):
+        """
+        The service account info in Google format.
+        """
+        client_email: str
+        private_key: str
+        token_uri: NotRequired[str]
+        project_id: NotRequired[str]
+        client_id: Optional[str]  # for Apache Spark pubsub
+        private_key_id: Optional[str]  # for Apache Spark pubsub
+
     @staticmethod
     def assign(info: Info, project_id=None) -> Info:
         if project_id:
@@ -31,14 +31,15 @@ class ServiceAccount(OptionsInterface):
         return info
 
 
-def from_service_account(info: Info = None, *,
+def from_service_account(info: ServiceAccount.Info = None,
+                         *,
                          client_email=None, private_key=None, project_id=None, scopes=None
                          ) -> ServiceAccount:
     if scopes is None:
         scopes = default_scopes
     scopes = list(map(lambda scope: 'https://www.' + scope, scopes))
     if not info:
-        info = Info(
+        info = ServiceAccount.Info(
             client_email=client_email,
             private_key=private_key,
             client_id=None,
