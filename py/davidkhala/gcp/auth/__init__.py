@@ -1,19 +1,8 @@
-from dataclasses import dataclass
 from datetime import datetime
-from typing import TypedDict, NotRequired, Optional
 
+import google.auth
 from google.api_core.client_options import ClientOptions
-from google.auth.credentials import CredentialsWithQuotaProject, TokenState
-
-
-@dataclass
-class ServiceAccountInfo(TypedDict):
-    client_email: str
-    private_key: str
-    token_uri: NotRequired[str]
-    project_id: NotRequired[str]
-    client_id: Optional[str] # for Apache Spark pubsub
-    private_key_id: Optional[str] # for Apache Spark pubsub
+from google.auth.credentials import Credentials, CredentialsWithQuotaProject, TokenState
 
 
 class OptionsInterface:
@@ -37,3 +26,22 @@ class OptionsInterface:
     @property
     def expiry(self) -> datetime:
         return self.credentials.expiry
+
+
+default_scopes = ['googleapis.com/auth/cloud-platform']
+"""
+[Oauth 2.0 Scopes](https://developers.google.com/identity/protocols/oauth2/scopes)
+"""
+
+
+class ADC(OptionsInterface):
+    credentials: Credentials
+
+
+def default(scopes=None) -> ADC:
+    c = ADC()
+    c.credentials, c.projectId = google.auth.default(
+        scopes=scopes,  # used to get Bearer Token
+        default_scopes=default_scopes,
+    )
+    return c
