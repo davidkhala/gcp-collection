@@ -5,7 +5,9 @@ from datetime import datetime
 from google.cloud.language import LanguageServiceClient, Document
 from google.oauth2 import service_account
 
-from davidkhala.gcp.auth import OptionsInterface, from_service_account, from_api_key
+from davidkhala.gcp.auth import OptionsInterface
+from davidkhala.gcp.auth.service_account import from_service_account
+from davidkhala.gcp.auth.api_key import from_api_key
 
 
 class SyntaxTestCase(unittest.TestCase):

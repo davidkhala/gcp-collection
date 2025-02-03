@@ -4,7 +4,7 @@ import unittest
 from google.auth.credentials import TokenState
 from google.oauth2.credentials import Credentials
 
-from davidkhala.gcp.auth import default
+from davidkhala.gcp.auth.options import default
 
 
 class SyntaxTestCase(unittest.TestCase):
