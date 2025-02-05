@@ -6,7 +6,7 @@ from google.api_core.exceptions import PermissionDenied
 from google.cloud.bigquery_storage import DataFormat
 from google.cloud.bigquery_storage_v1.reader import ReadRowsIterable
 
-from ci import credential
+from davidkhala.gcp.auth.ci import credential
 from davidkhala.gcp.bq.stream import Stream
 
 auth_options = credential()

@@ -8,12 +8,12 @@ from google.oauth2.credentials import Credentials as ADCredentials
 
 
 class OptionsInterface:
-    credentials: CredentialsWithQuotaProject
+    credentials: CredentialsWithQuotaProject = None
     """
     raw secret not cached in credentials object. You need cache it by yourself.
     """
     project: str
-    client_options: ClientOptions
+    client_options: ClientOptions = None
 
     @property
     def SCOPE(self) -> Union[Tuple[str, ...], None]:

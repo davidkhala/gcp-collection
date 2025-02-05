@@ -12,6 +12,10 @@ from davidkhala.gcp.auth.api_key import from_api_key
 
 class SyntaxTestCase(unittest.TestCase):
 
+    def test_from_any(self):
+        from davidkhala.gcp.auth.ci import credential
+        credential()
+
     def test_from_service_account(self):
         o = from_service_account(
             client_email=os.environ.get('CLIENT_EMAIL'),
