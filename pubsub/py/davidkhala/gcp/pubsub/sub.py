@@ -4,6 +4,7 @@ from davidkhala.gcp.auth import OptionsInterface
 from google.cloud.pubsub import SubscriberClient
 from google.cloud.pubsub_v1.futures import Future
 from google.cloud.pubsub_v1.subscriber.message import Message
+from google.pubsub import Subscription
 
 from davidkhala.gcp.pubsub import TopicAware
 
@@ -14,8 +15,10 @@ def show(message: Message):
 
 
 class Sub(TopicAware):
-    def __init__(self, subscription, auth: OptionsInterface):
-        super().__init__(auth)
+    subscription: str
+
+    def __init__(self, subscription: str, topic: str, auth: OptionsInterface):
+        super().__init__(topic, auth)
         self.client = SubscriberClient(
             credentials=auth.credentials,
             client_options=auth.client_options,
@@ -31,13 +34,19 @@ class Sub(TopicAware):
             topic=self.name,
         )
 
+    def get(self) -> Subscription:
+        return self.client.get_subscription(subscription=self.subscription_path)
+
+    def delete(self):
+        self.client.delete_subscription(subscription=self.subscription_path)
+
     @property
     def subscription_path(self):
         return SubscriberClient.subscription_path(self.project, self.subscription)
 
     def listen_async(self, callback: Callable[[Message], Any] = show) -> Future:
         # Cancelling the future will signal the process to shut down gracefully and exit.
-        return self.client.subscribe(self.subscription, callback)
+        return self.client.subscribe(self.subscription_path, callback)
 
     def listen(self, callback: Callable[[Message], Any]):
         """
@@ -46,5 +55,3 @@ class Sub(TopicAware):
         """
         promise = self.listen_async(callback)
         promise.result()
-        # TODO: how to cancel in callback?
-

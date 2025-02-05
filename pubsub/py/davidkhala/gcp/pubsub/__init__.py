@@ -8,7 +8,8 @@ class TopicAware:
     topic: str
     project: str
 
-    def __init__(self, auth: OptionsInterface):
+    def __init__(self, topic: str, auth: OptionsInterface):
+        self.topic = topic
         self.project = auth.project
 
     @staticmethod
