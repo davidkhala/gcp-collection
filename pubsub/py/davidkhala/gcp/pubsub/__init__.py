@@ -9,7 +9,7 @@ class TopicAware:
     project: str
 
     def __init__(self, auth: OptionsInterface):
-        self.project = auth.projectId
+        self.project = auth.project
 
     @staticmethod
     def topic_path(

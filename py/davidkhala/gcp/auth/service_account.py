@@ -52,5 +52,5 @@ def from_service_account(info: ServiceAccount.Info = None,
     c.credentials = service_account.Credentials.from_service_account_info(
         info, scopes=scopes
     )
-    c.projectId = info['project_id']
+    c.project = info['project_id']
     return c

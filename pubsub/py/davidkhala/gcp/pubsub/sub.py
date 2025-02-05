@@ -36,7 +36,7 @@ class Sub(TopicAware):
         return SubscriberClient.subscription_path(self.project, self.subscription)
 
     def listen_async(self, callback: Callable[[Message], Any] = show) -> Future:
-        # Cancelling the future will signal the process to shutdown gracefully and exit.
+        # Cancelling the future will signal the process to shut down gracefully and exit.
         return self.client.subscribe(self.subscription, callback)
 
     def listen(self, callback: Callable[[Message], Any]):

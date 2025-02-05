@@ -7,5 +7,5 @@ class Client(ClientWithProject):
     @staticmethod
     def from_options(options: OptionsInterface):
         return Client(
-            options.projectId, options.credentials, options.client_options
+            options.project, options.credentials, options.client_options
         )

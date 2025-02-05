@@ -13,7 +13,7 @@ class BigQueryInterface:
     table: str
 
     def __init__(self, auth: OptionsInterface):
-        self.project = auth.projectId
+        self.project = auth.project
 
     @staticmethod
     def parse_table_path(path: str) -> Dict[str, str]:
@@ -49,7 +49,7 @@ class BigQuery(BigQueryInterface):
 
     def __init__(self, auth: OptionsInterface):
         super().__init__(auth)
-        self.client = Client(auth.projectId,
+        self.client = Client(auth.project,
                              credentials=auth.credentials,
                              client_options=auth.client_options
                              )

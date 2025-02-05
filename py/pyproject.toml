@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "davidkhala.gcp"
-version = "0.3.3"
+version = "0.4.0"
 description = "Core gcp components"
 authors = ["David Liu <david-khala@hotmail.com>"]
 readme = "README.md"
