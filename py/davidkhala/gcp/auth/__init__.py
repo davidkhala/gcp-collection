@@ -12,7 +12,7 @@ class OptionsInterface:
     """
     raw secret not cached in credentials object. You need cache it by yourself.
     """
-    projectId: str
+    project: str
     client_options: ClientOptions
 
     @property
@@ -49,7 +49,7 @@ class ADC(OptionsInterface):
 
 def default(scopes=None) -> ADC:
     c = ADC()
-    c.credentials, c.projectId = google.auth.default(
+    c.credentials, c.project = google.auth.default(
         scopes=scopes,  # used to get Bearer Token
         default_scopes=default_scopes,
     )
