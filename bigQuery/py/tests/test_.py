@@ -4,7 +4,7 @@ from google.cloud.bigquery import DestinationFormat, DatasetReference
 from google.cloud.bigquery_storage import BigQueryReadClient
 
 from davidkhala.gcp.bq import BigQuery
-from tests.ci import credential
+from davidkhala.gcp.auth.ci import credential
 
 table_id = 'gcp-data-davidkhala.dbt_davidkhala.country_codes'
 

@@ -9,9 +9,10 @@ from google.pubsub import Subscription
 from davidkhala.gcp.pubsub import TopicAware
 
 
-def show(message: Message):
+def show(message: Message, future: Future):
     print(message.data)
     message.ack()
+    future.cancel()
 
 
 class Sub(TopicAware):
@@ -44,14 +45,15 @@ class Sub(TopicAware):
     def subscription_path(self):
         return SubscriberClient.subscription_path(self.project, self.subscription)
 
-    def listen_async(self, callback: Callable[[Message], Any] = show) -> Future:
+    def listen_async(self, callback: Callable[[Message, Future], Any]) -> Future:
         # Cancelling the future will signal the process to shut down gracefully and exit.
-        return self.client.subscribe(self.subscription_path, callback)
+        future = self.client.subscribe(self.subscription_path, lambda message: callback(message, future))
+        return future
 
-    def listen(self, callback: Callable[[Message], Any]):
+    def listen(self, callback: Callable[[Message, Future], Any] = show):
         """
         Waiting on the future
-        This will block forever or until a non-recoverable error is encountered (such as loss of network connectivity)
+        This will block forever or until a non-recoverable error is encountered (such as loss of network connectivity, cancelling the future)
         """
-        promise = self.listen_async(callback)
-        promise.result()
+        future = self.listen_async(callback)
+        future.result()
