@@ -1,8 +1,10 @@
 from datetime import datetime
+from typing import Union, Tuple
 
 import google.auth
 from google.api_core.client_options import ClientOptions
-from google.auth.credentials import Credentials, CredentialsWithQuotaProject, TokenState
+from google.auth.credentials import CredentialsWithQuotaProject, TokenState
+from google.oauth2.credentials import Credentials as ADCredentials
 
 
 class OptionsInterface:
@@ -12,6 +14,13 @@ class OptionsInterface:
     """
     projectId: str
     client_options: ClientOptions
+
+    @property
+    def SCOPE(self) -> Union[Tuple[str, ...], None]:
+        """
+        The scopes required for authenticating with a service.
+        """
+        return self.client_options.scopes if self.client_options else None
 
     @property
     def token(self) -> str:
@@ -35,7 +44,7 @@ default_scopes = ['googleapis.com/auth/cloud-platform']
 
 
 class ADC(OptionsInterface):
-    credentials: Credentials
+    credentials: ADCredentials
 
 
 def default(scopes=None) -> ADC:

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "davidkhala.gcp"
-version = "0.3.2"
-description = "@davidkhala/gcp: core gcp components"
+version = "0.3.3"
+description = "Core gcp components"
 authors = ["David Liu <david-khala@hotmail.com>"]
 readme = "README.md"
 packages = [{ include = "davidkhala" }]
@@ -10,10 +10,14 @@ packages = [{ include = "davidkhala" }]
 python = "^3.10"
 google-auth = { version = "*", extras = ['requests'] }
 google-api-core = "*"
+google-cloud-core = { version = "*", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 google-cloud-language = "*"
+
+[tool.poetry.extras]
+core = ["google-cloud-core"]
 
 [build-system]
 requires = ["poetry-core"]
