@@ -1,4 +1,4 @@
-from typing import Callable, Any
+from typing import Callable, Any, Iterable
 
 from davidkhala.gcp.auth import OptionsInterface
 from google.cloud.pubsub import SubscriberClient
@@ -40,6 +40,31 @@ class Sub(TopicAware):
 
     def delete(self):
         self.client.delete_subscription(subscription=self.subscription_path)
+
+    @property
+    def messages(self):
+        r = self.client.pull(subscription=self.subscription_path, return_immediately=True, max_messages=1000)
+        return r.received_messages
+
+    @property
+    def ack_ids(self) -> Iterable[str]:
+        return (_.ack_id for _ in self.messages)
+
+    def purge(self):
+        self.client.acknowledge(subscription=self.subscription_path, ack_ids=list(self.ack_ids))
+
+    def reset(self):
+        """
+        make the message available for redelivery
+        :return:
+        """
+
+        ack_ids = list(self.ack_ids)
+        self.client.modify_ack_deadline(
+            subscription=self.subscription_path,
+            ack_ids=ack_ids,
+            ack_deadline_seconds=0
+        )
 
     @property
     def subscription_path(self):
