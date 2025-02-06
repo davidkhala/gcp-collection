@@ -6,7 +6,8 @@ setup() {
   gcloud auth application-default login
   project=$(gcloud config get-value project)
   if [ -z "$project" ]; then
-    gcloud auth application-default set-quota-project "$1"
+    set-project $1
+
   fi
 
 }
@@ -15,6 +16,7 @@ access-token() {
 }
 set-project() {
   gcloud auth application-default set-quota-project "$1"
+  gcloud config set project $1
 }
 logout() {
   gcloud auth application-default revoke
