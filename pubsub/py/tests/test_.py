@@ -38,6 +38,7 @@ class TestCase(unittest.TestCase):
         print(self.sub.messages)
         self.sub.purge()
         self.assertEqual(0, len(self.sub.messages))
+        self.sub.purge()
 
 
 if __name__ == '__main__':

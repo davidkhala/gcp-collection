@@ -43,28 +43,30 @@ class Sub(TopicAware):
 
     @property
     def messages(self):
-        r = self.client.pull(subscription=self.subscription_path, return_immediately=True, max_messages=1000)
+        r = self.client.pull(subscription=self.subscription_path, max_messages=1000)
         return r.received_messages
 
     @property
-    def ack_ids(self) -> Iterable[str]:
-        return (_.ack_id for _ in self.messages)
+    def ack_ids(self) -> list[str]:
+        return list(_.ack_id for _ in self.messages)
 
     def purge(self):
-        self.client.acknowledge(subscription=self.subscription_path, ack_ids=list(self.ack_ids))
+        _snapshot = self.ack_ids
+        if len(_snapshot) > 0:
+            self.client.acknowledge(subscription=self.subscription_path, ack_ids=_snapshot)
 
     def reset(self):
         """
         make the message available for redelivery
         :return:
         """
-
-        ack_ids = list(self.ack_ids)
-        self.client.modify_ack_deadline(
-            subscription=self.subscription_path,
-            ack_ids=ack_ids,
-            ack_deadline_seconds=0
-        )
+        _snapshot = self.ack_ids
+        if len(_snapshot) > 0:
+            self.client.modify_ack_deadline(
+                subscription=self.subscription_path,
+                ack_ids=_snapshot,
+                ack_deadline_seconds=0
+            )
 
     @property
     def subscription_path(self):
