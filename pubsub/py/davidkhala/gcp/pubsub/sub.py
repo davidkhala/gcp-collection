@@ -29,7 +29,7 @@ class Sub(TopicAware):
     def disconnect(self):
         self.client.close()
 
-    def create(self, subscription: str):
+    def create(self):
         self.client.create_subscription(
             name=self.subscription_path,
             topic=self.name,
