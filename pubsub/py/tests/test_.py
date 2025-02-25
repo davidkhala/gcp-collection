@@ -18,7 +18,8 @@ pub = Pub(topic_id, auth)
 
 class MessageTestCase(unittest.TestCase):
     sub = Sub(id, topic_id, auth)
-
+    def setUp(self):
+        self.sub.create()
     def test_pubsub(self):
         print(pub.get())
 
@@ -48,9 +49,11 @@ class AdminTestCase(unittest.TestCase):
         sub = Sub(id, topic_id, auth)
         print('start create', datetime.datetime.now())
         sub.create()
+        sub.create()
         print('start delete', datetime.datetime.now())
         sub.delete()
         print('end delete', datetime.datetime.now())
+        sub.delete()
 
     def test_sub_lifecycle(self):
         self.sub_lifecycle(f"sub{uuid.uuid4().hex}")

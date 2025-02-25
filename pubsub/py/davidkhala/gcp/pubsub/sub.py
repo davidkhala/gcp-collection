@@ -1,6 +1,7 @@
 from typing import Callable, Any, Iterable
 
 from davidkhala.gcp.auth import OptionsInterface
+from google.api_core.exceptions import NotFound, AlreadyExists
 from google.cloud.pubsub import SubscriberClient
 from google.cloud.pubsub_v1.futures import Future
 from google.cloud.pubsub_v1.subscriber.message import Message
@@ -30,16 +31,24 @@ class Sub(TopicAware):
         self.client.close()
 
     def create(self):
-        self.client.create_subscription(
-            name=self.subscription_path,
-            topic=self.name,
-        )
+        try:
+            self.client.create_subscription(
+                name=self.subscription_path,
+                topic=self.name,
+            )
+        except AlreadyExists as e:
+            if f"409 Resource already exists in the project (resource={self.subscription})." != str(e):
+                raise e
 
     def get(self) -> Subscription:
         return self.client.get_subscription(subscription=self.subscription_path)
 
     def delete(self):
-        self.client.delete_subscription(subscription=self.subscription_path)
+        try:
+            self.client.delete_subscription(subscription=self.subscription_path)
+        except NotFound as e:
+            if f"404 Resource not found (resource={self.subscription})." != str(e):
+                raise e
 
     @property
     def messages(self):
