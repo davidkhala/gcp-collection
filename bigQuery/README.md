@@ -1,16 +1,6 @@
 # BigQuery
 
-[History](https://towardsdatascience.com/bigquery-the-unlikely-birth-of-a-cloud-juggernaut-b5ad476525b7)
 
-[Compete with Redshift](https://aws.amazon.com/cn/blogs/big-data/fact-or-fiction-google-big-query-outperforms-amazon-redshift-as-an-enterprise-data-warehouse/)
-
-Both ETL & ELT strategies can be used very effectively with BigQuery as the primary & final destination data store and GCS as the staging (or ingest) or intermediate data store as required.
-
-Denormalize Design: BigQuery is designed to store one large denormalized table.
-- less Join
-- No primary key, unique key or index column
-
-Dremel is the query engine
 
 # Document Index
 - [$bq CLI](./cli/README.md)
