@@ -4,7 +4,7 @@
   "dependencies": {
     "gcp-metadata": "latest",
     "@google-cloud/compute": "latest",
-    "@davidkhala/gcp-format": "latest"
+    "@davidkhala/gcp-format": "0.0.1"
   },
   "devDependencies": {
     "mocha": "latest"

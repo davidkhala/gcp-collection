@@ -16,7 +16,7 @@ jobs:
       - run: npm test
         env:
           API_KEY: ${{secrets.API_KEY}}
-  bq:
+  data:
     runs-on: ubuntu-latest
     environment: data
     defaults:
@@ -32,4 +32,23 @@ jobs:
       - run: npm test
         env:
           PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
-          CLIENT_EMAIL : ${{ vars.CLIENT_EMAIL }}
+          CLIENT_EMAIL: ${{vars.CLIENT_EMAIL}}
+  modules:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        module: [compute]
+    environment: ${{matrix.module}}
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          check-latest: true
+          node-version: lts/*
+      - run: npm install
+        working-directory: ${{matrix.module}}/nodejs
+      - run: npm test
+        working-directory: ${{matrix.module}}/nodejs
+        env:
+          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+          CLIENT_EMAIL: ${{vars.CLIENT_EMAIL}}

@@ -10,7 +10,7 @@ export default class GCPClass {
 
     /**
      *
-     * @param {GoogleAuthOptions} auth
+     * @param {GoogleAuthOptions} [auth] if not specified, context credential will be used as default
      */
     constructor(auth) {
         this.auth = auth;
@@ -20,15 +20,23 @@ export default class GCPClass {
         this.client = new ClientClass(this.auth);
     }
 
-    get projectId(){
+    get projectId() {
+        if (!this.auth) {
+            return
+        }
         return this.auth.projectId;
     }
+
     set projectId(projectId) {
+        if (!this.auth) {
+            this.auth = {}
+        }
         this.auth.projectId = projectId;
     }
+
     async connect() {
         if (this.projectId) {
-            await this.client.initialize() // assert-like. Will not prompt if no projectId in context
+            await this.client.initialize() // assert-like. Will not throw if no projectId in context
         } else {
             this.projectId = await this.client.getProjectId()
         }
