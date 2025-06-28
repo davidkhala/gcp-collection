@@ -15,7 +15,7 @@ access-token() {
   gcloud auth application-default print-access-token
 }
 set-project() {
-  gcloud auth application-default set-quota-project "$1"
+  gcloud auth application-default set-quota-project $1
   gcloud config set project $1
 }
 logout() {

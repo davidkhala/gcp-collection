@@ -35,11 +35,12 @@ export default class GCPClass {
     }
 
     async connect() {
-        if (this.projectId) {
-            await this.client.initialize() // assert-like. Will not throw if no projectId in context
-        } else {
+        if (!this.projectId) {
             this.projectId = await this.client.getProjectId()
         }
+
+        await this.client.initialize() // assert-like. Will not throw if no projectId in context
+
 
         return this.client;
     }
