@@ -9,6 +9,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@davidkhala/axios": "latest",
     "@google-cloud/compute": "latest",
     "google-auth-library": "latest",
     "mocha": "latest"
