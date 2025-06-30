@@ -1,6 +1,6 @@
 {
   "name": "@davidkhala/gcp-format",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "test": "mocha test"
@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@davidkhala/axios": "latest",
+    "@davidkhala/light": "latest",
     "@google-cloud/compute": "latest",
     "google-auth-library": "latest",
     "mocha": "latest"
