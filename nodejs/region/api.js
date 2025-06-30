@@ -1,7 +1,6 @@
 import {axiosPromise} from '@davidkhala/axios/index.js'
 import assert from 'assert'
 import {cloud_provider, cloud_location_type} from './const.js'
-import {} from '@davidkhala/light/format.js'
 
 export class API {
     /**
