@@ -2,12 +2,11 @@
 # - used for local dev environment
 set -e
 setup() {
-  # Interactive
-  gcloud auth application-default login
+  gcloud auth application-default login # Interactive
   project=$(gcloud config get-value project)
   if [ -z "$project" ]; then
+    echo "set project $1"
     set-project $1
-
   fi
 
 }
