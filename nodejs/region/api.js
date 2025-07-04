@@ -26,10 +26,14 @@ export class API {
         const params = {
             filter
         }
-        const {cloudLocations} = await axiosPromise({url: this.baseUrl, method: 'GET',params}, this.options)
+        const {cloudLocations} = await axiosPromise({url: this.baseUrl, method: 'GET', params}, this.options)
         return cloudLocations
     }
 
+    /**
+     * @param {string} source source region will be excluded automatically from the result list
+     * @param {string} query
+     */
     async search(source = "gcp-asia-east2", query = '') {
         const url = `${this.baseUrl}:search`;
 
@@ -39,7 +43,6 @@ export class API {
         }
 
         const {cloudLocations} = await axiosPromise({url, method: 'GET', params}, this.options)
-        // source will be excluded automatically from the result list
         return cloudLocations
     }
 
@@ -77,6 +80,7 @@ export class QueryBuilder {
                 assert.ok(value > 0 && Number.isInteger(value))
                 break;
             case 'territory_code':
+                // two-letter ISO 3166-1 alpha-2 code
                 assert.ok(['=', '!='].includes(operator))
                 assert.ok(typeof value === 'string')
                 value = `"${value}"`

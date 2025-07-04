@@ -7,7 +7,10 @@ jobs:
       id-token: 'write'
     runs-on: ubuntu-latest
     steps:
-    - uses: 'google-github-actions/auth@v2'
+    # In order to use exported credentials, you must add the `actions/checkout` step before calling `google-github-actions/auth`.
+    # This is due to how GitHub Actions creates $GITHUB_WORKSPACE
+    - uses: actions/checkout@main
+    - uses: google-github-actions/auth@main
       with:
         service_account: 'cloud-region@freetier-only.iam.gserviceaccount.com'
         workload_identity_provider: 'projects/207043494928/locations/global/workloadIdentityPools/github/providers/github-action'
