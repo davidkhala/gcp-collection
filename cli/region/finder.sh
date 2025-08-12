@@ -9,8 +9,8 @@ setup(){
 }
 # param ref: https://cloud.google.com/location-finder/docs/reference/rest/v1alpha/projects.locations.cloudLocations#CloudLocation
 search-territory(){
-  # TODO search will exclude source location,pay attention to list instead
-  CLOUD_REGION="gcp-asia-east2"
+  # Note search will exclude source location,pay attention to list instead
+  CLOUD_REGION=${2:-"gcp-asia-east2"}
   territory_code=$1 # a two-letter ISO 3166-1 alpha-2 code
   # query syntax ref: https://cloud.google.com/location-finder/docs/syntax
   gcloud alpha cloudlocationfinder cloud-locations search --source-cloud-location=$CLOUD_REGION \
