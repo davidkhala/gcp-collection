@@ -1,24 +1,30 @@
-[tool.poetry]
+[project]
 name = "davidkhala.gcp"
 version = "0.4.1"
 description = "Core gcp components"
-authors = ["David Liu <david-khala@hotmail.com>"]
+authors = [{ name = "David Liu", email = "david-khala@hotmail.com" }]
+requires-python = "~=3.10"
 readme = "README.md"
-packages = [{ include = "davidkhala" }]
+dependencies = [
+    "google-auth[requests]",
+    "google-api-core",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-google-auth = { version = "*", extras = ['requests'] }
-google-api-core = "*"
-google-cloud-core = { version = "*", optional = true }
-
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-google-cloud-language = "*"
-
-[tool.poetry.extras]
+[project.optional-dependencies]
 core = ["google-cloud-core"]
 
+[dependency-groups]
+dev = [
+    "pytest",
+    "google-cloud-language",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["davidkhala"]
+
+[tool.hatch.build.targets.wheel]
+include = ["davidkhala"]
+
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

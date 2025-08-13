@@ -1,17 +1,28 @@
 [project]
-name = "davidkhala.gcp.pubsub"
-version = "0.0.6"
-description = "@davidkhala/gcp/pubsub"
+name = "davidkhala.gcp.bq"
+version = "0.0.0"
+description = ""
 authors = [{ name = "David Liu", email = "david-khala@hotmail.com" }]
 requires-python = "~=3.10"
 readme = "README.md"
 dependencies = [
     "davidkhala-gcp",
-    "google-cloud-pubsub",
+    "google-cloud-bigquery",
 ]
 
+[project.optional-dependencies]
+migration = [
+    "google-cloud-bigquery-migration",
+    "davidkhala-utils",
+]
+stream = ["google-cloud-bigquery-storage[pyarrow, fastavro, pandas]"]
+
 [dependency-groups]
-dev = ["pytest"]
+dev = [
+    "pytest",
+    "davidkhala-gcp",
+    "davidkhala-data-format[gcp, arrow]",
+]
 
 [tool.hatch.build.targets.sdist]
 include = ["davidkhala"]

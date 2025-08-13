@@ -16,12 +16,12 @@ jobs:
       - run: npm test
         env:
           API_KEY: ${{secrets.API_KEY}}
-  data:
+  bq:
     runs-on: ubuntu-latest
     environment: data
     defaults:
       run:
-        working-directory: bigQuery/nodejs
+        working-directory: bq/nodejs
     steps:
       - uses: actions/setup-node@main
         with:
