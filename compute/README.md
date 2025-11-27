@@ -1,5 +1,9 @@
 [wiki](https://github.com/davidkhala/gcp-collections/wiki/Compute)
 
+Once you enable Compute Engine API, google will create a default service account named as
+`<projectNumber>-compute@developer.gserviceaccount.com`
+- project number can be found by `gcloud projects describe $project --format="value(projectNumber)"`
+- It can be deleted by user. Once deleted, it cannot be re-created by re-enable Compute Engine API 
 
 # Scheduler 实例时间表
 > Compute Engine System service account service-<number>@compute-system.iam.gserviceaccount.com needs to have [compute.instances.stop] permissions applied in order to perform this operation.
