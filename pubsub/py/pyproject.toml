@@ -3,7 +3,7 @@ name = "davidkhala.gcp.pubsub"
 version = "0.0.6"
 description = "@davidkhala/gcp/pubsub"
 authors = [{ name = "David Liu", email = "david-khala@hotmail.com" }]
-requires-python = "~=3.10"
+requires-python = ">=3.11"
 readme = "README.md"
 dependencies = [
     "davidkhala-gcp",

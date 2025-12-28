@@ -57,7 +57,7 @@ class Sub(TopicAware):
 
     @property
     def ack_ids(self) -> list[str]:
-        return list(_.ack_id for _ in self.messages)
+        return [_.ack_id for _ in self.messages]
 
     def purge(self):
         _snapshot = self.ack_ids

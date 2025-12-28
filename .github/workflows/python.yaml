@@ -4,6 +4,9 @@ jobs:
   core:
     runs-on: ubuntu-latest
     environment: data
+    strategy:
+      matrix:
+        version: [ '3.11', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
@@ -15,9 +18,13 @@ jobs:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           API_KEY: ${{secrets.API_KEY}}
           CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}
+          version: ${{matrix.version}}
   bq:
     runs-on: ubuntu-latest
     environment: data
+    strategy:
+      matrix:
+        version: [ '3.11', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
@@ -25,12 +32,16 @@ jobs:
           tests: bq/py/tests
           test-entry-point: pytest --ignore=migrate_test.py
           working-directory: bq/py
+          version: ${{matrix.version}}
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}
   pubsub:
     runs-on: ubuntu-latest
     environment: data
+    strategy:
+      matrix:
+        version: [ '3.11', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
@@ -38,6 +49,7 @@ jobs:
           tests: pubsub/py/tests
           test-entry-point: pytest
           working-directory: pubsub/py
+          version: ${{matrix.version}}
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}

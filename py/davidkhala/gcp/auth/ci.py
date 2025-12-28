@@ -18,7 +18,6 @@ def credential() -> OptionsInterface:
                 private_key=os.environ.get('PRIVATE_KEY')
             )
         else:
-            print('using ADC')
             r = default()
         OptionsInterface.token.fget(r)
     return r
