@@ -3,6 +3,7 @@ on: push
 jobs:
   common:
     runs-on: ubuntu-latest
+    environment: compute
     defaults:
       run:
         working-directory: nodejs
@@ -16,6 +17,8 @@ jobs:
       - run: npm test
         env:
           API_KEY: ${{secrets.API_KEY}}
+          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+          CLIENT_EMAIL: ${{vars.CLIENT_EMAIL}}
   bq:
     runs-on: ubuntu-latest
     environment: data

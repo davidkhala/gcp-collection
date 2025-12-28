@@ -1,3 +1,5 @@
+import {GoogleAuth} from "google-auth-library";
+
 export class GoogleAuthOptions {
     /**
      * An API key to use, optional. Cannot be used with {@link GoogleAuthOptions.credentials `credentials`}.
@@ -44,7 +46,9 @@ export class GoogleAuthOptions {
 
 export class OptionsBuilder {
     constructor(projectId) {
-        this._ = {}
+        this._ = {
+            scopes: ['https://www.googleapis.com/auth/cloud-platform']
+        }
         if (projectId) {
             this.projectId = projectId
         }
@@ -67,7 +71,7 @@ export class OptionsBuilder {
     }
 
     set scope(scope) {
-        this._.scopes = scope
+        this._.scopes.push(scope)
     }
 
     keyFile(serviceAccountJSONFile, globally) {
@@ -88,3 +92,14 @@ export class OptionsBuilder {
     }
 }
 
+/**
+ *
+ * @param auth {GoogleAuth}
+ * @returns {Promise<string>} token
+ */
+export async function printAccessToken(auth) {
+    const client = await auth.getClient()
+    const {token} = await client.getAccessToken()
+    console.info(token)
+    return token
+}

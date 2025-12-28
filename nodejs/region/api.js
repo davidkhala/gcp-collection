@@ -5,7 +5,7 @@ import {cloud_provider, cloud_location_type} from './const.js'
 export class API {
     /**
      *
-     * @param accessToken got by `gcloud auth print-access-token`
+     * @param accessToken {string} got by `gcloud auth print-access-token`
      * @param projectId
      */
     constructor(accessToken, projectId) {
