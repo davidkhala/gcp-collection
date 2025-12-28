@@ -1,6 +1,6 @@
 [project]
 name = "davidkhala.gcp"
-version = "0.4.1"
+version = "0.4.2"
 description = "Core gcp components"
 authors = [{ name = "David Liu", email = "david-khala@hotmail.com" }]
 requires-python = ">=3.11"
