@@ -1,5 +1,3 @@
-# Dataflow
-## Usage
 Dataflow usage is billed in per second increments, on a per job basis.
 Usage is stated in hours in order to apply hourly pricing to second-by-second use.
 

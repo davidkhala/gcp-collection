@@ -1,0 +1,2 @@
+# [Google’s Dataproc over BigQuery](https://cloud.google.com/dataproc/docs/concepts/connectors/bigquery)
+a library that enables Spark and Hadoop applications to read/write data from/to BigQuery using its native terminology.
