@@ -6,7 +6,7 @@ jobs:
     environment: data
     strategy:
       matrix:
-        version: [ '3.11', latest ]
+        version: [ '3.12', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
@@ -24,7 +24,7 @@ jobs:
     environment: data
     strategy:
       matrix:
-        version: [ '3.11', latest ]
+        version: [ '3.12', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
@@ -41,7 +41,7 @@ jobs:
     environment: data
     strategy:
       matrix:
-        version: [ '3.11', latest ]
+        version: [ '3.12', latest ]
     steps:
       - uses: actions/checkout@main
       - uses: davidkhala/uv-buildpack@main
