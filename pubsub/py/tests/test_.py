@@ -59,7 +59,7 @@ class AdminTestCase(unittest.TestCase):
         sub.delete()
         print('end delete', datetime.datetime.now())
         sub.delete()  # delete on empty should be allowed
-
+        sub.close()
     def test_sub_lifecycle(self):
         self.sub_lifecycle(f"sub{uuid.uuid4().hex}")
         self.assertRaises(InvalidArgument, lambda: self.sub_lifecycle("Databricks Shell"))

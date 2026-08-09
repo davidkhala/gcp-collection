@@ -27,7 +27,7 @@ class Sub(TopicAware):
         )
         self.subscription = subscription
 
-    def disconnect(self):
+    def close(self):
         self.client.close()
 
     def create(self):
@@ -93,3 +93,19 @@ class Sub(TopicAware):
         """
         future = self.listen_async(callback)
         future.result()
+
+
+class SubscriptionContext(Sub):
+    def __enter__(self):
+        assert self.open(), f"{self.__class__.__name__}::open() failed"
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+    def open(self) -> bool:
+        try:
+            self.create()
+            return True
+        except:
+            return False
