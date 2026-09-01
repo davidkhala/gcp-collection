@@ -10,3 +10,4 @@ Install
   - [via powershell](./gcloud.ps1)
 - centos: `curl https://raw.githubusercontent.com/davidkhala/centos-collection/refs/heads/main/gcp/gcloud.sh | bash -s install`
 - macos: `curl https://raw.githubusercontent.com/davidkhala/mac-utils/refs/heads/master/gcp/gcloud.sh | bash -s install`
+- any shell: `curl https://sdk.cloud.google.com | bash`
