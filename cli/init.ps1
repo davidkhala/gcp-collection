@@ -2,11 +2,11 @@ function DataProject {
     gcloud config set project gcp-data-davidkhala
 }
 
-function FreeProject {
-    gcloud config set project freetier-only
+function BaseProject {
+    gcloud config set project gcp-base-davidkhala
 }
 function HK {
-    gcloud config set compute/region asia-east1
+    gcloud config set compute/region asia-east2
 }
 function Desktop {
     # Interactive

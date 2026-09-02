@@ -16,7 +16,7 @@ delete-pool() {
 setup-github-action() {
     local pool="${1}"
     local provider="${2}"
-    local service_account="${3:-"cloud-region@freetier-only.iam.gserviceaccount.com"}"
+    local service_account="${3:-"cloud-region@gcp-base-davidkhala.iam.gserviceaccount.com"}"
     local GITHUB_ORG="${3:-davidkhala}"
     poolId=$(create-pool $pool)
 

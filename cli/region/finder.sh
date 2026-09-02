@@ -1,7 +1,7 @@
 set -e
 setup(){
-  project="freetier-only"
-  principal="cloud-region@freetier-only.iam.gserviceaccount.com"
+  project="gcp-base-davidkhala"
+  principal="cloud-region@gcp-base-davidkhala.iam.gserviceaccount.com"
 
   gcloud services enable cloudlocationfinder.googleapis.com --project $project
   gcloud projects add-iam-policy-binding $project --member serviceAccount:$principal --role roles/cloudlocationfinder.viewer
